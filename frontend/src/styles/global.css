@@ -1,9 +1,9 @@
 :root {
-  --topbar-bg: #F2ECE6;
-  --header-bg: #FFFFFF;
-  --primary-text: #4D001B;
-  --accent: #CD0A20;
-  --white: #FFFFFF;
+  --topbar-bg: #f2ece6;
+  --header-bg: #ffffff;
+  --primary-text: #4d001b;
+  --accent: #cd0a20;
+  --white: #ffffff;
   --border-soft: #e5ded8;
 }
 
@@ -14,7 +14,7 @@
 
 body {
   margin: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   background: var(--white);
   color: var(--primary-text);
 }
@@ -23,7 +23,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Topbar */
@@ -35,7 +35,7 @@ h4 {
   justify-content: flex-end;
   align-items: center;
   padding: 0 20px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   color: var(--primary-text);
 }
@@ -59,7 +59,7 @@ h4 {
 }
 
 .globe-icon {
-  font-family: 'Material Symbols Outlined';
+  font-family: "Material Symbols Outlined";
   font-size: 18px;
   line-height: 1;
   color: var(--primary-text);
@@ -67,10 +67,10 @@ h4 {
   align-items: center;
 
   font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 .topbar-language button::after {
@@ -82,14 +82,14 @@ h4 {
 .language-dropdown {
   position: absolute;
   top: 42px;
-  left: 50%;                     
-  transform: translateX(-50%);   
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--white);
   border: 1px solid var(--border-soft);
   display: flex;
   flex-direction: column;
   min-width: 140px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 200;
 }
 
@@ -120,7 +120,7 @@ h4 {
   align-items: center;
   padding: 0 54px;
   color: var(--primary-text);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   position: relative;
   z-index: 50;
 }
@@ -151,7 +151,7 @@ h4 {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 40px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .simple-back {
@@ -212,7 +212,7 @@ h4 {
   position: relative;
   padding: 10px;
   color: var(--primary-text);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 15.2px;
@@ -256,7 +256,725 @@ h4 {
   position: absolute;
 
   top: calc(100% + 10px);
-  left: 0;                 
+  left: 0;
+  transform: translateY(10px);
+
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 220px;
+  padding: 8px 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: all 0.25s ease;
+
+  z-index: 100;
+  text-align: left;
+}
+
+.has-dropdown:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown li {
+  width: 100%;
+}
+
+.dropdown a {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--primary-text);
+  white-space: nowrap;
+}
+
+.dropdown a::before,
+.dropdown a::after {
+  display: none;
+}
+
+.dropdown a:hover {
+  background: var(--topbar-bg);
+}
+
+/* Login */
+.header-login {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primary-text);
+  cursor: pointer;
+}
+
+.login-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.login-icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--white);
+}
+
+.login-text {
+  white-space: nowrap;
+}
+
+.header-login:hover .login-icon-circle {
+  background: var(--accent);
+}
+
+.logout-btn {
+  background: #111;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+/* Hero video */
+.hero-video {
+  position: relative;
+  width: 100%;
+  height: 825px;
+  overflow: hidden;
+}
+
+.hero-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Booking box */
+.booking-wrapper {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.booking-box {
+  width: fit-content;
+  min-height: 95px;
+  background: var(--white);
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 20px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  font-family: "Montserrat", sans-serif;
+}
+
+.booking-large-field {
+  height: 42px;
+  width: 280px;
+  background: var(--white);
+  border: 3px solid var(--primary-text);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  color: var(--primary-text);
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.booking-large-field:hover {
+  background: var(--topbar-bg);
+}
+
+.book-button {
+  height: 52px;
+  width: 150px;
+  border: none;
+  border-radius: 16px;
+  background: var(--accent);
+  color: var(--white);
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.book-button:hover {
+  background: var(--primary-text);
+}
+
+.material-symbols-outlined.booking-material-icon {
+  font-family: "Material Symbols Outlined";
+  font-size: 30px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-text);
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 40;
+}
+
+/* Date popup */
+.date-popup {
+  margin-top: 20px;
+  background: var(--white);
+  border-radius: 22px;
+  padding: 26px 32px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  font-family: "Montserrat", sans-serif;
+}
+
+.months-wrapper {
+  display: flex;
+  gap: 55px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.month-block h2 {
+  text-align: center;
+  margin: 0 0 24px;
+  color: var(--primary-text);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 36px);
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-grid span {
+  text-align: center;
+  color: #8b8b8b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calendar-grid button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 13px;
+  background: transparent;
+  color: var(--primary-text);
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.calendar-grid button:hover {
+  background: var(--topbar-bg);
+}
+
+.selected-date {
+  background: var(--primary-text) !important;
+  color: var(--white) !important;
+}
+
+.date-done-button {
+  display: block;
+  margin: 34px 0 0 auto;
+  width: 120px;
+  height: 50px;
+  border: none;
+  border-radius: 16px;
+  background: var(--primary-text);
+  color: var(--white);
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.date-done-button:hover {
+  background: var(--accent);
+}
+
+.guest-popup {
+  margin-top: 20px;
+  width: 420px;
+  background: var(--white);
+  border-radius: 22px;
+  padding: 28px 32px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  font-family: "Montserrat", sans-serif;
+  margin-left: auto;
+}
+
+.guest-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.guest-row h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  color: var(--primary-text);
+}
+
+.guest-row p {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.counter button {
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--primary-text);
+  border-radius: 50%;
+  background: white;
+  color: var(--primary-text);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.counter span {
+  min-width: 22px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.guest-done-button {
+  display: block;
+  margin: 24px 0 0 auto;
+  width: 120px;
+  height: 50px;
+  border: none;
+  border-radius: 16px;
+  background: var(--primary-text);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Hotel intro */
+.hotel-intro {
+  max-width: 850px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.intro-small {
+  color: var(--accent);
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.hotel-intro h2 {
+  font-size: 36px;
+  color: var(--primary-text);
+  margin-bottom: 20px;
+}
+
+.hotel-intro p {
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+/* Feature grid */
+.feature-grid-section {
+  padding: 80px 60px;
+  background: var(--white);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  text-align: center;
+}
+
+.feature-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  color: var(--primary-text);
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.feature-card p {
+  max-width: 420px;
+  margin: 0 auto 18px;
+  line-height: 1.6;
+}
+
+.feature-card button {
+  background: transparent;
+  border: 1px solid var(--primary-text);
+  color: var(--primary-text);
+  padding: 10px 22px;
+  cursor: pointer;
+}
+
+/* Surroundings */
+.surroundings {
+  height: 650px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.surroundings::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.surroundings-content {
+  position: relative;
+  text-align: center;
+  color: var(--white);
+  z-index: 1;
+}
+
+.surroundings-content h2 {
+  font-size: 46px;
+  margin-bottom: 18px;
+}
+
+.surroundings-content a {
+  color: var(--white);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+:root {
+  --topbar-bg: #f2ece6;
+  --header-bg: #ffffff;
+  --primary-text: #4d001b;
+  --accent: #cd0a20;
+  --white: #ffffff;
+  --border-soft: #e5ded8;
+}
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  background: var(--white);
+  color: var(--primary-text);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Topbar */
+.topbar {
+  width: 100%;
+  height: 37px;
+  background-color: var(--topbar-bg);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: var(--primary-text);
+}
+
+.topbar-language {
+  position: relative;
+}
+
+.topbar-language button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+}
+
+.globe-icon {
+  font-family: "Material Symbols Outlined";
+  font-size: 18px;
+  line-height: 1;
+  color: var(--primary-text);
+  display: inline-flex;
+  align-items: center;
+
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.topbar-language button::after {
+  content: "▾";
+  font-size: 11px;
+  color: var(--primary-text);
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 200;
+}
+
+.language-dropdown button {
+  all: unset;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-text);
+  display: block;
+}
+
+.language-dropdown button::after {
+  content: none;
+}
+
+.language-dropdown button:hover {
+  background: var(--topbar-bg);
+}
+
+/* Header */
+.header {
+  height: 92px;
+  background: var(--header-bg);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0 54px;
+  color: var(--primary-text);
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 50;
+}
+
+.header-brand {
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.header-brand:hover {
+  opacity: 0.85;
+}
+
+.header-login {
+  text-decoration: none;
+}
+
+/* Simple Header */
+.simple-header {
+  height: 90px;
+  background: var(--white);
+  border-bottom: 3px solid var(--primary-text);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 40px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.simple-back {
+  color: var(--primary-text);
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.simple-back span {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.simple-logo {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.simple-empty {
+  width: 100%;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  text-align: center;
+  position: relative;
+  z-index: 50;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  list-style: none;
+  position: relative;
+}
+
+.nav-links a {
+  display: block;
+  position: relative;
+  padding: 10px;
+  color: var(--primary-text);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 15.2px;
+  letter-spacing: 0.9px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.nav-links > li > a::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.nav-links > li > a:hover::before {
+  transform: scaleX(1);
+}
+
+/* Navbar dropdown */
+.has-dropdown {
+  position: relative;
+}
+
+.has-dropdown::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 10px;
+}
+
+.dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  left: 0;
   transform: translateY(10px);
 
   background: var(--white);
@@ -383,7 +1101,7 @@ h4 {
   gap: 18px;
   padding: 16px 20px;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .booking-large-field {
@@ -397,7 +1115,7 @@ h4 {
   gap: 12px;
   padding: 0 20px;
   color: var(--primary-text);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
@@ -416,7 +1134,7 @@ h4 {
   border-radius: 16px;
   background: var(--accent);
   color: var(--white);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 24px;
   font-weight: 800;
   cursor: pointer;
@@ -428,7 +1146,7 @@ h4 {
 }
 
 .material-symbols-outlined.booking-material-icon {
-  font-family: 'Material Symbols Outlined';
+  font-family: "Material Symbols Outlined";
   font-size: 30px;
   line-height: 1;
   display: inline-flex;
@@ -436,10 +1154,10 @@ h4 {
   justify-content: center;
   color: var(--primary-text);
   font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 40;
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 40;
 }
 
 /* Date popup */
@@ -449,7 +1167,7 @@ h4 {
   border-radius: 22px;
   padding: 26px 32px;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .months-wrapper {
@@ -513,7 +1231,7 @@ h4 {
   border-radius: 16px;
   background: var(--primary-text);
   color: var(--white);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
@@ -531,7 +1249,7 @@ h4 {
   border-radius: 22px;
   padding: 28px 32px;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin-left: auto;
 }
 

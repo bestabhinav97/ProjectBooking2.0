@@ -1,11 +1,59 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import TopBar from "../components/TopBar";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "../styles/login.css";
 
 function Login() {
+  const { setUser } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    setError("");
+
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter both email and password");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Login failed");
+        return;
+      }
+
+      setUser(data.user ?? data);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      setError("Server error. Please try again.");
+    }
+  };
+
   return (
     <div className="login-page">
       <TopBar />
+
       <header className="login-page-header">
         <Link to="/" className="login-back-link">
           <svg
@@ -39,7 +87,8 @@ function Login() {
               <h2>Welcome!</h2>
               <h1>Please log in</h1>
             </header>
-            <form className="login-form" action="#" method="post">
+
+            <form className="login-form" onSubmit={handleLogin}>
               <div className="login-field">
                 <label htmlFor="login-email" className="sr-only">
                   Email or membership number
@@ -52,8 +101,11 @@ function Login() {
                   placeholder="Email / Membership number"
                   required
                   autoComplete="username"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
+
               <div className="login-field">
                 <label htmlFor="login-password" className="sr-only">
                   Password
@@ -66,8 +118,23 @@ function Login() {
                   placeholder="Password"
                   required
                   autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+
+              {error && (
+                <p
+                  style={{
+                    color: "red",
+                    fontSize: "14px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {error}
+                </p>
+              )}
+
               <div className="login-options-row">
                 <label className="login-remember">
                   <input type="checkbox" name="remember" />
@@ -81,9 +148,11 @@ function Login() {
                 <button className="login-btn-primary" type="submit">
                   Log in
                 </button>
+
                 <div className="login-separator">
                   <span>or</span>
                 </div>
+
                 <button className="login-btn-outline" type="button">
                   <svg
                     fill="none"
@@ -109,11 +178,15 @@ function Login() {
             <div className="login-membership-inner">
               <div className="login-membership-content">
                 <p className="login-cursive">Let&apos;s be friends!</p>
+
                 <h2>Not a member? Join us!</h2>
+
                 <Link to="/joinnow" className="login-btn-join">
                   Join Hotel Friends
                 </Link>
+
                 <hr className="login-membership-divider" />
+
                 <p className="login-membership-copy">
                   Get offers, discounts, surprises and other great things. Like
                   free reward nights at our hotels. Because hey, only the best

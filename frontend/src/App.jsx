@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
 import Home from "./pages/Home";
 import JoinNow from "./pages/JoinNow";
@@ -7,14 +8,16 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/joinnow" element={<JoinNow />} />
-        <Route path="/booking" element={<Booking />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/joinnow" element={<JoinNow />} />
+          <Route path="/booking" element={<Booking />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

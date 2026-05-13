@@ -8,13 +8,12 @@ import Surroundings from "../components/Surroundings";
 function Home() {
   return (
     <>
-      <TopBar/>
-      <Header/>
-      <HeroVideo/>
-      <HotelIntro/>
-      <FeatureGrid/>
-      <Surroundings/>
-     
+      <TopBar />
+      <Header />
+      <HeroVideo />
+      <HotelIntro />
+      <FeatureGrid />
+      <Surroundings />
     </>
   );
 }
