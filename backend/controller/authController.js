@@ -1,0 +1,324 @@
+/**
+ * ========== AUTH CONTROLLER ==========
+ * Handles user authentication:
+ * - User registration (signUp)
+ * - User login and JWT token creation
+ * - User logout (cookie clearing)
+ */
+
+const validator = require("validator");
+const userModel = require("../model/user");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+/**
+ * signUp - Register a new user
+ *
+ * FLOW:
+ * 1. Validate all required fields exist: name, email, password
+ * 2. Validate email format using validator library
+ * 3. Check if email already exists in database
+ * 4. If exists, return 409 Conflict error
+ * 5. If new, hash password and insert into database
+ * 6. Return new user record (without password)
+ *
+ * REQUEST BODY:
+ *   - name: User's full name
+ *   - email: User's email (must be unique and valid format)
+ *   - password: User's password (will be hashed before storage)
+ */
+module.exports.signUp = async (req, res, next) => {
+  console.log("HELLO SIGN UP");
+
+  const {
+    firstName,
+    lastName,
+    birthDay,
+    birthMonth,
+    birthYear,
+    zipCode,
+    country,
+    email,
+    phoneNumber,
+    password,
+    terms,
+  } = req.body;
+  console.log(firstName);
+
+  // ===== VALIDATION =====
+
+  // First Name
+  if (!firstName?.trim()) {
+    return res.status(400).json({
+      success: false,
+      message: "FIRST NAME IS REQUIRED",
+    });
+  }
+
+  // Last Name
+  if (!lastName?.trim()) {
+    return res.status(400).json({
+      success: false,
+      message: "LAST NAME IS REQUIRED",
+    });
+  }
+
+  // Birth Date
+  if (!birthDay || !birthMonth || !birthYear) {
+    return res.status(400).json({
+      success: false,
+      message: "BIRTH DATE IS REQUIRED",
+    });
+  }
+
+  // Zip Code
+  if (!zipCode?.trim()) {
+    return res.status(400).json({
+      success: false,
+      message: "ZIP CODE IS REQUIRED",
+    });
+  }
+
+  // Country
+  if (!country) {
+    return res.status(400).json({
+      success: false,
+      message: "COUNTRY IS REQUIRED",
+    });
+  }
+
+  // Email
+  if (!email?.trim()) {
+    return res.status(400).json({
+      success: false,
+      message: "EMAIL IS REQUIRED",
+    });
+  }
+
+  // Validate email
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({
+      success: false,
+      message: "INVALID EMAIL",
+    });
+  }
+
+  // Phone Number
+  if (!phoneNumber?.trim()) {
+    return res.status(400).json({
+      success: false,
+      message: "PHONE NUMBER IS REQUIRED",
+    });
+  }
+
+  // Password
+  if (!password) {
+    return res.status(400).json({
+      success: false,
+      message: "PASSWORD IS REQUIRED",
+    });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({
+      success: false,
+      message: "PASSWORD MUST BE AT LEAST 6 CHARACTERS",
+    });
+  }
+
+  // Terms checkbox
+  if (!terms) {
+    return res.status(400).json({
+      success: false,
+      message: "YOU MUST ACCEPT TERMS",
+    });
+  }
+
+  try {
+    // Check if email already exists
+    const result = await userModel.checkExistingEmail(email);
+
+    if (result.length > 0) {
+      return res.status(409).json({
+        success: false,
+        message: "EMAIL ALREADY EXISTS",
+      });
+    }
+
+    // Convert month name -> number for MySQL DATE
+    const months = {
+      January: "01",
+      February: "02",
+      March: "03",
+      April: "04",
+      May: "05",
+      June: "06",
+      July: "07",
+      August: "08",
+      September: "09",
+      October: "10",
+      November: "11",
+      December: "12",
+    };
+
+    const formattedMonth = months[birthMonth];
+
+    // Format date: YYYY-MM-DD
+    const birthDate = `${birthYear}-${formattedMonth}-${String(
+      birthDay,
+    ).padStart(2, "0")}`;
+
+    // Sign up user
+    const insertedUser = await userModel.signUp(
+      firstName,
+      lastName,
+      birthDate,
+      zipCode,
+      country,
+      phoneNumber,
+      email,
+      password,
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "SIGNED UP SUCCESSFULLY",
+      data: insertedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+/**
+ * login - Authenticate user and create JWT token
+ *
+ * FLOW:
+ * 1. Validate email and password provided
+ * 2. Query database for user with matching email
+ * 3. Compare provided password with stored hashed password
+ * 4. If match, create JWT token signed with JWT_SECRET
+ * 5. Set token as httpOnly cookie (secure, can't be accessed by JS)
+ * 6. Return user object (without password) to client
+ *
+ * REQUEST BODY:
+ *   - email: User's registered email
+ *   - password: User's password (will be compared to hash)
+ *
+ * RESPONSE:
+ *   - Sets httpOnly cookie with JWT token
+ *   - Returns user data (userId, name, email, role)
+ */
+module.exports.login = async (req, res, next) => {
+  try {
+    console.log("controller touched");
+    const { email, password } = req.body;
+
+    // ===== VALIDATION =====
+    if (!email) {
+      return res.status(400).json({ success: false, message: "MISSING EMAIL" });
+    }
+    if (!password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "MISSING PASSWORD" });
+    }
+
+    // ===== AUTHENTICATE USER =====
+    // Model compares password with bcrypt hash and returns user if match
+    const result = await userModel.login(email, password);
+
+    if (result == false) {
+      // Email not found or password doesn't match
+      return res
+        .status(404)
+        .json({ success: false, message: "INVALID EMAIL OR PASSWORD" });
+    } else {
+      // ===== CREATE JWT TOKEN =====
+      // Token contains user data and expires in 1 hour
+      const token = jwt.sign(result, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+
+      // ===== SET SECURE COOKIE =====
+      // httpOnly: JS can't access (prevents XSS attacks)
+      // sameSite: None required for cross-origin requests
+      // maxAge: 1 hour in milliseconds (matches JWT expiration)
+      res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 3600000, // 1 hour
+      });
+
+      // ===== RETURN SUCCESS RESPONSE =====
+      return res.status(200).json({
+        success: true,
+        message: "LOGGED IN SUCCESSFULLY",
+        user: result,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+/**
+ * me - Return currently authenticated user from token cookie
+ *
+ * FLOW:
+ * 1. Read token from httpOnly cookie
+ * 2. Verify JWT token
+ * 3. Return user data if valid
+ * 4. Return 401 if missing/invalid token
+ */
+module.exports.me = async (req, res, next) => {
+  try {
+    const token = req.cookies?.token;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Not authenticated" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    return res.status(200).json({ success: true, user: decoded });
+  } catch (error) {
+    console.log("Auth me error:", error.message);
+    return res
+      .status(401)
+      .json({ success: false, message: "Invalid or expired token" });
+  }
+};
+
+/**
+ * logout - Clear user session by removing token cookie
+ *
+ * FLOW:
+ * 1. Clear 'token' cookie from response
+ * 2. Return success message to client
+ * 3. Browser will delete the cookie
+ * 4. User is logged out (future requests won't have token)
+ */
+module.exports.logout = async (req, res, next) => {
+  try {
+    // Clear the 'token' cookie with same options as when setting it
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "LOGGED OUT SUCCESSFULLY",
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
