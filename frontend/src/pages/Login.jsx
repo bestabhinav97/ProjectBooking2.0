@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import TopBar from "../components/TopBar";
+import Header from "../compenents/Header";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/login.css";
@@ -53,7 +54,7 @@ function Login() {
 
   return (
     <div className="login-page">
-      <TopBar />
+      <Header />
 
       <header className="login-page-header">
         <Link to="/" className="login-back-link">
