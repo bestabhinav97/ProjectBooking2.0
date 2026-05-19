@@ -1,0 +1,42 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { AuthProvider } from "./context/AuthContext";
+import ScrollToTop from "./components/ScrollToTop";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import JoinNow from "./pages/JoinNow";
+import Booking from "./pages/Booking";
+import PackagesOffers from "./pages/PackagesOffers";
+import Rooms from "./pages/Rooms";
+import SingleRoom from "./pages/SingleRoom";
+import SuperiorRoom from "./pages/SuperiorRoom";
+import SuiteRoom from "./pages/SuiteRoom";
+import MeetingsEvents from "./pages/MeetingsEvents";
+import Wellness from "./pages/Wellness";
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/joinnow" element={<JoinNow />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/packages-offers" element={<PackagesOffers />} />
+          <Route path="/rooms" element={<Rooms />} />
+          <Route path="/rooms/single" element={<SingleRoom />} />
+          <Route path="/rooms/superior" element={<SuperiorRoom />} />
+          <Route path="/rooms/suite" element={<SuiteRoom />} />
+          <Route path="/meetings-events" element={<MeetingsEvents />} />
+          <Route path="/wellness" element={<Wellness />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
+
+export default App;
