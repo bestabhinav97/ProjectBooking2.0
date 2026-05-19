@@ -16,6 +16,7 @@
     "validator": "^13.15.35"
   },
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "db:import": "node scripts/import-init-sql.js"
   }
 }

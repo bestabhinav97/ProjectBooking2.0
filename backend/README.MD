@@ -43,6 +43,14 @@ npm install
 
 Since the database is not shared remotely, you must recreate it locally using the provided schema.
 
+> **If you already have a database** from an older dump and get errors about unknown columns (`profileImageUrl`, `passwordResetToken`), run:
+>
+> ```bash
+> mysql -u root -p bookingproject < db/migration-user-profile-reset.sql
+> ```
+>
+> Or re-import `db/init.sql` after backing up any data you need.
+
 ### 1. Create the Database
 
 Open **MySQL Workbench** and run:

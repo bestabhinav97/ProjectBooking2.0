@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
+import { API_BASE } from "../config/api";
 import "../styles/joinnow.css";
 
 function JoinNow() {
@@ -19,7 +20,7 @@ function JoinNow() {
     const userData = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("http://localhost:3000/auth/signUp", {
+      const response = await fetch(`${API_BASE}/auth/signUp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
