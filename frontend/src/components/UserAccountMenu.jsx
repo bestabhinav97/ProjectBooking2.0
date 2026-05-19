@@ -35,12 +35,19 @@ export default function UserAccountMenu() {
 
   if (!user) return null;
 
+  const avatarSrc =
+    typeof user.profileImageUrl === "string" &&
+    user.profileImageUrl.trim() !== ""
+      ? user.profileImageUrl
+      : null;
+
   return (
     <div className="has-dropdown account-menu-slot">
       <button type="button" className="account-menu-trigger-btn">
-        {user.profileImageUrl ? (
+        {avatarSrc ? (
           <img
-            src={user.profileImageUrl}
+            key={avatarSrc.slice(0, 80)}
+            src={avatarSrc}
             alt=""
             className="account-menu-avatar-thumb"
           />

@@ -153,6 +153,16 @@ module.exports.getPublicUserById = async (userId) => {
   );
   const u = rows[0];
   if (!u) return null;
+  let pic = u.profileImageUrl;
+  if (pic == null || pic === "") {
+    pic = null;
+  } else if (Buffer.isBuffer(pic)) {
+    pic = pic.length ? pic.toString("utf8") : null;
+  } else {
+    pic = String(pic);
+  }
+  if (typeof pic === "string" && pic.trim() === "") pic = null;
+  u.profileImageUrl = pic;
   return u;
 };
 

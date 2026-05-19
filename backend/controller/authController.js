@@ -26,17 +26,15 @@ function payloadForJwt(user) {
   } else {
     birth = null;
   }
+  // Keep the JWT small — never store the profile image in the token.
+  // Profile data (including profileImageUrl) is fetched fresh from the DB
+  // on every /auth/me call. Storing a large data-URL here overflows the
+  // Node HTTP parser header limit (8 KB) when the Vite proxy forwards
+  // the Set-Cookie response, breaking login entirely.
   return {
     userId: Number(user.userId),
-    firstName: user.firstName ?? null,
-    lastName: user.lastName ?? null,
-    birthDate: birth,
-    zipCode: user.zipCode ?? null,
-    country: user.country ?? null,
-    phoneNumber: user.phoneNumber ?? null,
     email: user.email,
     role: user.role,
-    profileImageUrl: user.profileImageUrl ?? null,
   };
 }
 
@@ -342,6 +340,8 @@ module.exports.me = async (req, res, next) => {
         .json({ success: false, message: "Invalid or expired token" });
     }
 
+    res.set("Cache-Control", "no-store, private, must-revalidate");
+    res.set("Pragma", "no-cache");
     return res.status(200).json({ success: true, user });
   } catch (error) {
     console.log("Auth me error:", error.message);

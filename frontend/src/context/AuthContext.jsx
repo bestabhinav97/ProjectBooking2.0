@@ -13,18 +13,22 @@ export function AuthProvider({ children }) {
       const response = await fetch(`${API_BASE}/auth/me`, {
         method: "GET",
         credentials: "include",
+        cache: "no-store",
       });
 
       if (!response.ok) {
         setUser(null);
-        return;
+        return null;
       }
 
       const data = await response.json();
-      setUser(data?.user ?? null);
+      const next = data?.user ?? null;
+      setUser(next);
+      return next;
     } catch (error) {
       console.error("Failed to refresh user:", error);
       setUser(null);
+      return null;
     }
   }, []);
 
@@ -36,6 +40,7 @@ export function AuthProvider({ children }) {
         const response = await fetch(`${API_BASE}/auth/me`, {
           method: "GET",
           credentials: "include",
+          cache: "no-store",
           signal: controller.signal,
         });
 

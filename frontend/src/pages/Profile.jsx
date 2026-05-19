@@ -39,7 +39,7 @@ function applyUserToFormState(user) {
   };
 }
 
-function ProfileEditor({ user, setUser }) {
+function ProfileEditor({ user, refreshUser }) {
   const init = applyUserToFormState(user);
   const [firstName, setFirstName] = useState(init.firstName);
   const [lastName, setLastName] = useState(init.lastName);
@@ -50,7 +50,6 @@ function ProfileEditor({ user, setUser }) {
   const [email] = useState(init.email);
   const [previewUrl, setPreviewUrl] = useState(init.previewUrl);
   const [profileImageUrl, setProfileImageUrl] = useState(init.profileImageUrl);
-  const [imageDirty, setImageDirty] = useState(false);
 
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
@@ -78,7 +77,6 @@ function ProfileEditor({ user, setUser }) {
       }
       setPreviewUrl(url);
       setProfileImageUrl(url);
-      setImageDirty(true);
       setMessage({ type: "", text: "" });
     };
     reader.readAsDataURL(file);
@@ -87,7 +85,6 @@ function ProfileEditor({ user, setUser }) {
   const clearPhoto = () => {
     setPreviewUrl(null);
     setProfileImageUrl(null);
-    setImageDirty(true);
   };
 
   const handleSubmit = async (e) => {
@@ -104,8 +101,10 @@ function ProfileEditor({ user, setUser }) {
       birthDate: birthDate || null,
     };
 
-    if (imageDirty) {
-      body.profileImageUrl = profileImageUrl;
+    const savedPic = user.profileImageUrl || null;
+    const currentPic = profileImageUrl ?? null;
+    if (currentPic !== savedPic) {
+      body.profileImageUrl = currentPic;
     }
 
     try {
@@ -125,18 +124,19 @@ function ProfileEditor({ user, setUser }) {
         return;
       }
 
-      const u = data.user;
-      setUser(u);
-      const next = applyUserToFormState(u);
-      setFirstName(next.firstName);
-      setLastName(next.lastName);
-      setPhoneNumber(next.phoneNumber);
-      setZipCode(next.zipCode);
-      setCountry(next.country);
-      setBirthDate(next.birthDate);
-      setPreviewUrl(next.previewUrl);
-      setProfileImageUrl(next.profileImageUrl);
-      setImageDirty(false);
+      const refreshed = await refreshUser();
+      const u = refreshed ?? data.user;
+      if (u) {
+        const next = applyUserToFormState(u);
+        setFirstName(next.firstName);
+        setLastName(next.lastName);
+        setPhoneNumber(next.phoneNumber);
+        setZipCode(next.zipCode);
+        setCountry(next.country);
+        setBirthDate(next.birthDate);
+        setPreviewUrl(next.previewUrl);
+        setProfileImageUrl(next.profileImageUrl);
+      }
       setMessage({ type: "ok", text: "Profile saved." });
     } catch {
       setMessage({ type: "error", text: "Network error. Try again." });
@@ -295,7 +295,7 @@ function ProfileEditor({ user, setUser }) {
 }
 
 function Profile() {
-  const { user, setUser, loading } = useAuth();
+  const { user, loading, refreshUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -320,7 +320,7 @@ function Profile() {
     <div className="join-page">
       <TopBar />
       <Header />
-      <ProfileEditor key={user.userId} user={user} setUser={setUser} />
+      <ProfileEditor key={user.userId} user={user} refreshUser={refreshUser} />
     </div>
   );
 }
