@@ -4,6 +4,7 @@ const db = require("./db/db");
 const cookie = require("cookie-parser");
 const helmet = require("helmet");
 const errorHandler = require("./middlewear/errorHandler");
+const bookingController = require("./controller/bookingController");
 const cors = require("cors");
 const path = require("path");
 
@@ -11,9 +12,16 @@ const path = require("path");
 // Each router handles a specific resource (auth, rooms, bookings, admin)
 const authRouter = require("./routes/authRoute");
 const roomRouter = require("./routes/roomRoute");
+const bookingRouter = require("./routes/bookingRoute");
 
 // ===== INITIALIZE EXPRESS APP =====
 const app = express();
+
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  bookingController.handleWebHook,
+);
 
 // ===== MIDDLEWARE STACK =====
 // Set security HTTP headers
@@ -34,6 +42,7 @@ app.use(
 
 app.use("/auth", authRouter);
 app.use("/rooms", roomRouter);
+app.use("/bookings", bookingRouter);
 
 // ===== HEALTH CHECK ROUTE =====
 app.get("/", (req, res) => {

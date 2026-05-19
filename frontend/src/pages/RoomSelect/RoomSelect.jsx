@@ -11,6 +11,12 @@ function RoomSelect() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Extract variables from the initial search box redirect
+  const rooms = location.state?.rooms || [];
+  const totalGuests = location.state?.totalGuests || 1;
+  const fromDate = location.state?.fromDate || null;
+  const toDate = location.state?.toDate || null;
+
   const [availableRooms, setAvailableRooms] = useState([]);
 
   // Filters state
@@ -253,7 +259,12 @@ function RoomSelect() {
         </aside>
 
         <main className="rooms-area">
-          <RoomList rooms={filteredRooms} />
+          <RoomList
+            rooms={filteredRooms}
+            totalGuests={totalGuests}
+            fromDate={fromDate}
+            toDate={toDate}
+          />
         </main>
       </div>
       <Footer />

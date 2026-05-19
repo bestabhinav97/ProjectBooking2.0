@@ -16,6 +16,9 @@ import SuiteRoom from "./pages/SuiteRoom";
 import MeetingsEvents from "./pages/MeetingsEvents";
 import Wellness from "./pages/Wellness";
 import AdminTest from "./pages/AdminTest";
+import RoomSummary from "./pages/RoomSummary/RoomSummary";
+import BookingSuccess from "./pages/RoomSummary/BookingSuccess";
+import BookingFailed from "./pages/RoomSummary/BookingFailed";
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
           <Route path="/meetings-events" element={<MeetingsEvents />} />
           <Route path="/wellness" element={<Wellness />} />
           <Route path="/admin-test" element={<AdminTest />} />
+          <Route path="/booking/summary" element={<RoomSummary />} />
+          <Route path="/booking-success" element={<BookingSuccess />} />
+          <Route path="/booking-failed" element={<BookingFailed />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

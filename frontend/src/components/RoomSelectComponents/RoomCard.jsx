@@ -1,9 +1,26 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const RoomCard = ({ room }) => {
+const RoomCard = ({ room, totalGuests, fromDate, toDate }) => {
   if (!room) return null;
 
   const isAvailable = room.status === "available";
+  const navigate = useNavigate();
+
+  function handleBook() {
+    if (!isAvailable) return;
+
+    // Use the totalGuests prop passed from RoomSelect (already properly calculated)
+    // Forward the room data, guest count, and selected dates to the summary page
+    navigate("/booking/summary", {
+      state: {
+        room: room,
+        totalGuests: totalGuests,
+        fromDate: fromDate,
+        toDate: toDate,
+      },
+    });
+  }
 
   return (
     <div className="hotel-card">
@@ -58,7 +75,11 @@ const RoomCard = ({ room }) => {
           </div>
         </div>
 
-        <button className="select-btn" disabled={!isAvailable}>
+        <button
+          className="select-btn"
+          disabled={!isAvailable}
+          onClick={handleBook}
+        >
           {isAvailable ? "BOOK" : "Unavailable"}
         </button>
       </div>

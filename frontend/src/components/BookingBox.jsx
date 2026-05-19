@@ -5,25 +5,57 @@ function BookingBox() {
   const [dateOpen, setDateOpen] = useState(false);
   const [guestOpen, setGuestOpen] = useState(false);
 
-  // Note: For a robust app, consider refactoring these to full ISO strings (e.g., "2026-05-06")
-  // so your backend can parse the dates reliably.
-  const [checkIn, setCheckIn] = useState(6);
-  const [checkOut, setCheckOut] = useState(7);
+  const [checkIn, setCheckIn] = useState("2026-05-06");
+  const [checkOut, setCheckOut] = useState("2026-05-07");
 
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(1);
   const navigate = useNavigate();
 
-  function handleDateClick(day) {
+  const months = [
+    { label: "May 2026", year: 2026, month: 5, days: 31, startOffset: 4 },
+    { label: "June 2026", year: 2026, month: 6, days: 30, startOffset: 0 },
+    { label: "July 2026", year: 2026, month: 7, days: 31, startOffset: 2 },
+  ];
+
+  function buildDateString(year, month, day) {
+    return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  }
+
+  function formatDateLabel(dateString) {
+    if (!dateString) return "";
+
+    const [year, month, day] = dateString.split("-");
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return `${parseInt(day, 10)} ${monthNames[parseInt(month, 10) - 1]}`;
+  }
+
+  function handleDateClick(year, month, day) {
+    const dateString = buildDateString(year, month, day);
+
     if (!checkIn || checkOut) {
-      setCheckIn(day);
+      setCheckIn(dateString);
       setCheckOut(null);
     } else {
-      if (day > checkIn) {
-        setCheckOut(day);
+      if (new Date(dateString) > new Date(checkIn)) {
+        setCheckOut(dateString);
       } else {
-        setCheckIn(day);
+        setCheckIn(dateString);
       }
     }
   }
@@ -35,18 +67,15 @@ function BookingBox() {
       return;
     }
 
-    // 1. Properly pad the day numbers to match YYYY-MM-DD format (e.g., 6 becomes "06")
-    const formattedCheckIn = `2026-05-${String(checkIn).padStart(2, "0")}`;
-    const formattedCheckOut = `2026-05-${String(checkOut).padStart(2, "0")}`;
+    const formattedCheckIn = checkIn;
+    const formattedCheckOut = checkOut;
 
-    // 2. Combine adults and children
     const noOfBedsRequired = adults + children;
 
-    // 3. Match the exact payload keys your backend body parsing expects
     const requestBody = {
-      fromDate: formattedCheckIn, // e.g., "2026-05-06"
-      toDate: formattedCheckOut, // e.g., "2026-05-07"
-      noOfBedsRequired: noOfBedsRequired, // e.g., 2
+      fromDate: formattedCheckIn,
+      toDate: formattedCheckOut,
+      noOfBedsRequired: noOfBedsRequired,
     };
 
     try {
@@ -74,8 +103,15 @@ function BookingBox() {
       const roomsArray = availableRoomsData.data || [];
       console.log(roomsArray);
 
-      // Pass the clean array down to the next route
-      navigate("/roomSelect", { state: { rooms: roomsArray } });
+      // Pass the clean array and selected dates down to the next route
+      navigate("/roomSelect", {
+        state: {
+          rooms: roomsArray,
+          totalGuests: adults + children,
+          fromDate: formattedCheckIn,
+          toDate: formattedCheckOut,
+        },
+      });
     } catch (error) {
       console.error("Booking error:", error);
       alert(`Failed to fetch rooms: ${error.message}`);
@@ -98,7 +134,7 @@ function BookingBox() {
 
           <span>
             {checkIn && checkOut
-              ? `${checkIn} May - ${checkOut} May`
+              ? `${formatDateLabel(checkIn)} - ${formatDateLabel(checkOut)}`
               : "Select dates"}
           </span>
         </button>
@@ -185,60 +221,50 @@ function BookingBox() {
       {dateOpen && (
         <div className="date-popup">
           <div className="months-wrapper">
-            <div className="month-block">
-              <h2>May 2026</h2>
+            {months.map((month) => (
+              <div className="month-block" key={month.label}>
+                <h2>{month.label}</h2>
 
-              <div className="calendar-grid">
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-                <span>Sun</span>
+                <div className="calendar-grid">
+                  <span>Mon</span>
+                  <span>Tue</span>
+                  <span>Wed</span>
+                  <span>Thu</span>
+                  <span>Fri</span>
+                  <span>Sat</span>
+                  <span>Sun</span>
 
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                  {Array.from({ length: month.startOffset }).map((_, index) => (
+                    <span key={`${month.month}-empty-${index}`}></span>
+                  ))}
 
-                {[
-                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                  19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
-                ].map((day) => (
-                  <button
-                    key={day}
-                    onClick={() => handleDateClick(day)}
-                    className={
-                      day === checkIn || day === checkOut ? "selected-date" : ""
-                    }
-                  >
-                    {day}
-                  </button>
-                ))}
+                  {Array.from({ length: month.days }, (_, index) => {
+                    const day = index + 1;
+                    const dateString = buildDateString(
+                      month.year,
+                      month.month,
+                      day,
+                    );
+
+                    return (
+                      <button
+                        key={dateString}
+                        onClick={() =>
+                          handleDateClick(month.year, month.month, day)
+                        }
+                        className={
+                          dateString === checkIn || dateString === checkOut
+                            ? "selected-date"
+                            : ""
+                        }
+                      >
+                        {day}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-
-            <div className="month-block">
-              <h2>June 2026</h2>
-
-              <div className="calendar-grid">
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-                <span>Sun</span>
-
-                {[
-                  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                  19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-                ].map((day) => (
-                  <button key={day}>{day}</button>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
 
           <button

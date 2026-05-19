@@ -59,3 +59,15 @@ module.exports.getAllAvailableRooms = async (
     throw error;
   }
 };
+
+module.exports.getRoomDetails = async (roomNumber) => {
+  try {
+    const query = "SELECT * FROM room WHERE roomNumber = ?";
+    const [result] = await db.execute(query, [roomNumber]);
+    const roomDetails = result[0];
+    return roomDetails;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
