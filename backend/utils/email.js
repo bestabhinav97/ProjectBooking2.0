@@ -25,14 +25,23 @@ const nodemailer = require("nodemailer");
  *       Replace with production email service (SendGrid, AWS SES, etc.) for production
  */
 module.exports.sendEmail = async (options) => {
+  const smtpHost = process.env.SMTP_HOST || "sandbox.smtp.mailtrap.io";
+  const smtpPort = Number(process.env.SMTP_PORT || 2525);
+  const smtpUser = process.env.SMTP_USER || "9f5e26722f639d";
+  const smtpPass = process.env.SMTP_PASS || "5277ef600d4ff3";
+  const smtpSecure = process.env.SMTP_SECURE === "true";
+  const defaultFrom =
+    process.env.EMAIL_FROM ||
+    '"Hotel Booking System" <reservations@yourhotel.com>';
+
   // ===== CREATE TRANSPORTER (Email Provider Configuration) =====
-  // Mailtrap is an email testing tool (Dev/Staging environment)
   const transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpSecure,
     auth: {
-      user: "9f5e26722f639d", // Mailtrap credentials (should be in .env!)
-      pass: "5277ef600d4ff3",
+      user: smtpUser,
+      pass: smtpPass,
     },
   });
 

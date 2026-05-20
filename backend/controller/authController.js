@@ -6,10 +6,52 @@
  * - User logout (cookie clearing)
  */
 
+const crypto = require("crypto");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 const userModel = require("../model/user");
+const emailHelper = require("../utils/email");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
+/**
+ * JWT must be JSON-serializable (no BigInt / Date objects from mysql2 edge cases).
+ */
+function payloadForJwt(user) {
+  if (!user) return null;
+  let birth = user.birthDate;
+  if (birth instanceof Date) {
+    birth = birth.toISOString().slice(0, 10);
+  } else if (birth != null) {
+    birth = String(birth).slice(0, 10);
+  } else {
+    birth = null;
+  }
+  // Keep the JWT small — never store the profile image in the token.
+  // Profile data (including profileImageUrl) is fetched fresh from the DB
+  // on every /auth/me call. Storing a large data-URL here overflows the
+  // Node HTTP parser header limit (8 KB) when the Vite proxy forwards
+  // the Set-Cookie response, breaking login entirely.
+  return {
+    userId: Number(user.userId),
+    email: user.email,
+    role: user.role,
+  };
+}
+
+/**
+ * Dev: SameSite=Lax + Secure=false so http://localhost:5173 → :3000 keeps the session cookie.
+ * Prod: SameSite=None + Secure=true for cross-origin HTTPS frontends.
+ */
+function authCookieBaseOptions() {
+  const prod = process.env.NODE_ENV === "production";
+  return {
+    httpOnly: true,
+    path: "/",
+    sameSite: prod ? "none" : "lax",
+    secure: prod,
+  };
+}
 
 /**
  * signUp - Register a new user
@@ -237,27 +279,17 @@ module.exports.login = async (req, res, next) => {
     } else {
       // ===== CREATE JWT TOKEN =====
       // Token contains user data and expires in 1 hour
-      const token = jwt.sign(result, process.env.JWT_SECRET, {
+      const token = jwt.sign(payloadForJwt(result), process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
 
       // ===== SET SECURE COOKIE =====
       // httpOnly: JS can't access (prevents XSS attacks)
-      // sameSite: None required for cross-origin requests
+      // sameSite: Lax in dev (localhost ports); None+Secure in production for cross-site
       // maxAge: 1 hour in milliseconds (matches JWT expiration)
-      const isProduction = process.env.NODE_ENV === "production";
-
       res.cookie("token", token, {
-        httpOnly: true,
+        ...authCookieBaseOptions(),
         maxAge: 3600000, // 1 hour
-
-        // In production (HTTPS), use "None".
-        // In local development (HTTP), use "Lax" so the browser allows cross-port tracking.
-        sameSite: isProduction ? "None" : "Lax",
-
-        // Must be true in production (requires HTTPS).
-        // Must be false in development (standard HTTP).
-        secure: isProduction,
       });
 
       // ===== RETURN SUCCESS RESPONSE =====
@@ -293,8 +325,25 @@ module.exports.me = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.userId;
 
-    return res.status(200).json({ success: true, user: decoded });
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid or expired token" });
+    }
+
+    const user = await userModel.getPublicUserById(userId);
+
+    if (!user) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid or expired token" });
+    }
+
+    res.set("Cache-Control", "no-store, private, must-revalidate");
+    res.set("Pragma", "no-cache");
+    return res.status(200).json({ success: true, user });
   } catch (error) {
     console.log("Auth me error:", error.message);
     return res
@@ -315,16 +364,196 @@ module.exports.me = async (req, res, next) => {
 module.exports.logout = async (req, res, next) => {
   try {
     // Clear the 'token' cookie with same options as when setting it
-    res.clearCookie("token", {
-      httpOnly: true,
-      sameSite: "None",
-      secure: process.env.NODE_ENV === "production",
-    });
+    res.clearCookie("token", authCookieBaseOptions());
 
     return res.status(200).json({
       success: true,
       message: "LOGGED OUT SUCCESSFULLY",
     });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+const forgotPasswordMessage = {
+  success: true,
+  message:
+    "If that email is registered, you will receive password reset instructions.",
+};
+
+/**
+ * forgotPassword — store reset token (no email integration).
+ * In non-production, response includes devResetLink for local testing.
+ */
+module.exports.forgotPassword = async (req, res, next) => {
+  try {
+    const email = req.body?.email?.trim();
+
+    if (!email || !validator.isEmail(email)) {
+      return res.status(200).json(forgotPasswordMessage);
+    }
+
+    const row = await userModel.findByEmailLoose(email);
+
+    if (!row) {
+      return res.status(200).json(forgotPasswordMessage);
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+    await userModel.setPasswordResetToken(row.userId, token, expiresAt);
+
+    const base = (process.env.FRONTEND_URL || "http://localhost:5173").replace(
+      /\/$/,
+      "",
+    );
+    const resetLink = `${base}/reset-password?token=${token}`;
+    console.log("[forgot-password] reset link (dev):", resetLink);
+
+    const emailPayload = {
+      email: row.email,
+      subject: "Reset your password",
+      message: `You requested a password reset for your account.
+
+Click the link below to reset your password:
+${resetLink}
+
+If you did not request a password reset, you can safely ignore this email.
+
+This link expires in 1 hour.`,
+    };
+
+    try {
+      await emailHelper.sendEmail(emailPayload);
+      console.log("[forgot-password] reset email queued for:", row.email);
+    } catch (emailError) {
+      console.log(
+        "[forgot-password] failed to send reset email:",
+        emailError.message,
+      );
+    }
+
+    const payload = { ...forgotPasswordMessage };
+    if (process.env.NODE_ENV !== "production") {
+      payload.devResetLink = resetLink;
+    }
+
+    return res.status(200).json(payload);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+/**
+ * resetPassword — set new password using token from forgot-password flow.
+ */
+module.exports.resetPassword = async (req, res, next) => {
+  try {
+    const { token, newPassword } = req.body || {};
+
+    if (!token || typeof token !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "RESET_TOKEN_REQUIRED",
+      });
+    }
+
+    if (!newPassword || newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "PASSWORD_MUST_BE_AT_LEAST_6_CHARACTERS",
+      });
+    }
+
+    const row = await userModel.findByPasswordResetToken(token.trim());
+
+    if (!row || !row.passwordResetExpires) {
+      return res.status(400).json({
+        success: false,
+        message: "INVALID_OR_EXPIRED_RESET_TOKEN",
+      });
+    }
+
+    if (new Date(row.passwordResetExpires) < new Date()) {
+      return res.status(400).json({
+        success: false,
+        message: "INVALID_OR_EXPIRED_RESET_TOKEN",
+      });
+    }
+
+    const hashed = await bcrypt.hash(newPassword, 12);
+    await userModel.updatePassword(row.userId, hashed);
+    await userModel.clearPasswordResetToken(row.userId);
+
+    return res.status(200).json({
+      success: true,
+      message: "PASSWORD_UPDATED_YOU_CAN_LOG_IN",
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+/**
+ * updateProfile — PATCH fields for authenticated user.
+ */
+module.exports.updateProfile = async (req, res, next) => {
+  try {
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Not authenticated" });
+    }
+
+    const {
+      firstName,
+      lastName,
+      phoneNumber,
+      zipCode,
+      country,
+      birthDate,
+      profileImageUrl,
+    } = req.body || {};
+
+    if (
+      birthDate !== undefined &&
+      birthDate !== null &&
+      birthDate !== "" &&
+      !validator.isISO8601(String(birthDate), { strict: true }) &&
+      !/^\d{4}-\d{2}-\d{2}$/.test(String(birthDate))
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "INVALID_BIRTH_DATE_USE_YYYY_MM_DD",
+      });
+    }
+
+    try {
+      const user = await userModel.updateProfile(userId, {
+        firstName,
+        lastName,
+        phoneNumber,
+        zipCode,
+        country,
+        birthDate,
+        profileImageUrl,
+      });
+
+      return res.status(200).json({ success: true, user });
+    } catch (err) {
+      if (err.code === "PROFILE_IMAGE_TOO_LARGE") {
+        return res.status(413).json({
+          success: false,
+          message: "PROFILE_IMAGE_TOO_LARGE",
+        });
+      }
+      throw err;
+    }
   } catch (error) {
     console.log(error);
     next(error);

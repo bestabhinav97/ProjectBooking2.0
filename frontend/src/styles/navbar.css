@@ -85,6 +85,8 @@
   flex-direction: column;
   min-width: 220px;
   padding: 8px 0;
+  margin: 0;
+  list-style: none;
   opacity: 0;
   visibility: hidden;
   transition: all 0.25s ease;
@@ -118,5 +120,107 @@
 }
 
 .dropdown a:hover {
+  background: var(--topbar-bg);
+}
+
+/* Keep nav dropdowns open when moving focus inside (keyboard) */
+.has-dropdown:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Account menu — same .has-dropdown + .dropdown pattern, right-aligned in header */
+.header .account-menu-slot {
+  justify-self: end;
+}
+
+.header .account-menu-slot .dropdown.account-menu-dropdown {
+  right: 0;
+  left: auto;
+  min-width: 220px;
+}
+
+.header .account-menu-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  margin: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 15.2px;
+  letter-spacing: 0.9px;
+  color: var(--primary-text);
+  text-align: center;
+}
+
+.header .account-menu-trigger-btn::after {
+  content: "▾";
+  font-size: 11px;
+  line-height: 1;
+  margin-left: 2px;
+  color: var(--primary-text);
+}
+
+.header .account-menu-trigger-btn:hover {
+  opacity: 0.92;
+}
+
+.header .account-menu-trigger-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.header .account-menu-avatar-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border-soft);
+}
+
+.header .account-menu-avatar-initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-text);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.header .account-menu-dropdown a::after {
+  display: none;
+}
+
+.header .account-menu-dropdown button.account-menu-logout {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  line-height: 15.2px;
+  color: var(--primary-text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.header .account-menu-dropdown button.account-menu-logout:hover {
   background: var(--topbar-bg);
 }

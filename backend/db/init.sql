@@ -37,7 +37,11 @@ CREATE TABLE `bookings` (
   KEY `roomNumber` (`roomNumber`),
   CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`),
   CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`roomNumber`) REFERENCES `room` (`roomNumber`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> 426903850f12f779ed76d2dac8e99af22c7a0de5
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +50,11 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `bookings` VALUES (11,1,102,'confirmed','2026-06-15','2026-06-20','2026-04-04 00:45:13','2026-04-06 10:41:47',250.00),(12,1,104,'confirmed','2026-05-11','2026-06-10','2026-04-14 05:15:46','2026-04-14 05:16:29',2550.00);
+=======
+INSERT INTO `bookings` VALUES (11,1,102,'confirmed','2026-06-15','2026-06-20','2026-04-04 00:45:13','2026-04-06 10:41:47',250.00),(12,1,104,'confirmed','2026-05-11','2026-06-10','2026-04-14 05:15:46','2026-04-14 05:16:29',2550.00),(13,1,101,'pending','2026-05-30','2026-05-31','2026-05-19 07:58:57','2026-05-19 07:58:57',50.00);
+>>>>>>> 426903850f12f779ed76d2dac8e99af22c7a0de5
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,6 +70,10 @@ CREATE TABLE `room` (
   `noOfBeds` int NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'available',
   `pricePerNight` decimal(10,2) NOT NULL DEFAULT '0.00',
+<<<<<<< HEAD
+=======
+  `type` varchar(20) DEFAULT NULL,
+>>>>>>> 426903850f12f779ed76d2dac8e99af22c7a0de5
   PRIMARY KEY (`roomNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -72,7 +84,11 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `room` VALUES (101,1,'available',50.00),(102,1,'available',50.00),(103,2,'available',85.00),(104,2,'available',85.00),(105,1,'available',50.00),(201,2,'available',85.00),(202,2,'available',85.00),(203,3,'available',120.00),(204,1,'available',50.00),(205,2,'available',85.00),(301,4,'available',150.00),(302,1,'available',50.00),(303,2,'available',85.00),(304,2,'available',85.00),(305,1,'available',50.00),(401,4,'available',150.00),(402,4,'available',150.00);
+=======
+INSERT INTO `room` VALUES (101,1,'available',50.00,'single'),(102,1,'available',50.00,'single'),(103,2,'available',85.00,'superior'),(104,2,'available',85.00,'superior'),(105,1,'available',50.00,'single'),(201,2,'available',85.00,'superior'),(202,2,'available',85.00,'superior'),(203,3,'available',120.00,'suite'),(204,1,'available',50.00,'single'),(205,2,'available',85.00,'superior'),(301,4,'available',150.00,'suite'),(302,1,'available',50.00,'single'),(303,2,'available',85.00,'superior'),(304,2,'available',85.00,'superior'),(305,1,'available',50.00,'single'),(401,4,'available',150.00,'suite'),(402,4,'available',150.00,'suite');
+>>>>>>> 426903850f12f779ed76d2dac8e99af22c7a0de5
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,6 +101,7 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `userId` int NOT NULL AUTO_INCREMENT,
+<<<<<<< HEAD
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -92,6 +109,24 @@ CREATE TABLE `user` (
   PRIMARY KEY (`userId`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+  `firstName` varchar(100) DEFAULT NULL,
+  `lastName` varchar(100) DEFAULT NULL,
+  `birthDate` date DEFAULT NULL,
+  `zipCode` varchar(20) DEFAULT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `phoneNumber` varchar(30) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(20) NOT NULL DEFAULT 'customer',
+  `profileImageUrl` mediumtext,
+  `passwordResetToken` varchar(64) DEFAULT NULL,
+  `passwordResetExpires` datetime DEFAULT NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `email` (`email`),
+  KEY `idx_password_reset` (`passwordResetToken`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> 426903850f12f779ed76d2dac8e99af22c7a0de5
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +135,11 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `user` VALUES (1,'ABhi','bestabhinav97@gmail.com','$2b$12$kXEb2xbTfarEI/7xWgQ.pO9t2k/MCuuiQQA/q5diJoP9xbw6izToS','admin');
+=======
+INSERT INTO `user` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,'bestabhinav97@gmail.com','$2b$12$kXEb2xbTfarEI/7xWgQ.pO9t2k/MCuuiQQA/q5diJoP9xbw6izToS','admin',NULL,NULL,NULL),(2,'Abhinav','Srinivasan','2003-11-06','25438','Sweden','+46764409569','plugabhinav@gmail.com','$2b$12$Zo6h/Xmd4HTYe2OiKT08cenlXge0/URbCYOqRAMBgxLsb/q4c.BY2','customer',NULL,NULL,NULL);
+>>>>>>> 426903850f12f779ed76d2dac8e99af22c7a0de5
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -113,4 +152,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2026-05-03 16:28:35
+=======
+-- Dump completed on 2026-05-19 12:40:02
+>>>>>>> 426903850f12f779ed76d2dac8e99af22c7a0de5

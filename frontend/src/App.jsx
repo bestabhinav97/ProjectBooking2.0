@@ -5,6 +5,9 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import Profile from "./pages/Profile";
 import JoinNow from "./pages/JoinNow";
 import Booking from "./pages/Booking";
 import PackagesOffers from "./pages/PackagesOffers";
@@ -29,6 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/joinnow" element={<JoinNow />} />
           <Route path="/roomSelect" element={<RoomSelect />} />
           <Route path="/packages-offers" element={<PackagesOffers />} />

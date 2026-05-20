@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE } from "../config/api";
 import "../styles/login.css";
 
 function Login() {
@@ -24,7 +24,7 @@ function Login() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch(`${API_BASE}/auth/login`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -44,7 +44,6 @@ function Login() {
       }
 
       setUser(data.user ?? data);
-      console.log("hello");
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -142,9 +141,9 @@ function Login() {
                   <input type="checkbox" name="remember" />
                   <span>Keep me logged in</span>
                 </label>
-                <a className="login-forgot" href="#">
+                <Link className="login-forgot" to="/forgot-password">
                   Forgot password
-                </a>
+                </Link>
               </div>
               <div className="login-actions">
                 <button className="login-btn-primary" type="submit">
