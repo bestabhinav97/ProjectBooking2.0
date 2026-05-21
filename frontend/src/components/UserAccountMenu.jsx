@@ -66,7 +66,7 @@ export default function UserAccountMenu() {
           </Link>
         </li>
         <li role="none">
-          <Link to="/booking" role="menuitem">
+          <Link to="/my-bookings" role="menuitem">
             My stays
           </Link>
         </li>

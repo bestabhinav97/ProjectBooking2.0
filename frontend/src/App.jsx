@@ -23,6 +23,7 @@ import AdminReservations from "./pages/AdminReservations";
 import RoomSummary from "./pages/room-summary/RoomSummary";
 import BookingSuccess from "./pages/room-summary/BookingSuccess";
 import BookingFailed from "./pages/room-summary/BookingFailed";
+import MyBookings from "./pages/MyBookings";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/booking/summary" element={<RoomSummary />} />
           <Route path="/booking-success" element={<BookingSuccess />} />
           <Route path="/booking-failed" element={<BookingFailed />} />
+          <Route path="/my-bookings" element={<MyBookings />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -13,6 +13,14 @@ export default defineConfig({
         target: "http://localhost:3000",
         changeOrigin: true,
       },
+      "/bookings": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+      "/rooms": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
     },
   },
 });
