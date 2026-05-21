@@ -2,10 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import TopBar from "../../components/TopBar";
 import Header from "../../components/Header";
-import RoomList from "../../components/RoomSelectComponents/RoomList";
-import "../../styles/RoomSelect/roomSelect.css";
+import RoomList from "../../components/room-select/RoomList";
+import "../../styles/pages/room-select/room-select.css";
 import Footer from "../../components/Footer";
-import RoomPageModifyBar from "../../components/RoomSelectComponents/RoomPageModifyBar";
+import RoomPageModifyBar from "../../components/room-select/RoomPageModifyBar";
 
 function RoomSelect() {
   const location = useLocation();

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/RoomSelect/roomSelect.css";
+import "../../styles/pages/room-select/room-select.css";
 
 export default function RoomPageModifyBar() {
   const [activePopup, setActivePopup] = useState(null);

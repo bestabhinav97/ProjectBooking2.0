@@ -14,14 +14,14 @@ import PackagesOffers from "./pages/PackagesOffers";
 import Rooms from "./pages/Rooms";
 import SingleRoom from "./pages/SingleRoom";
 import SuperiorRoom from "./pages/SuperiorRoom";
-import RoomSelect from "./pages/RoomSelect/RoomSelect";
+import RoomSelect from "./pages/room-select/RoomSelect";
 import SuiteRoom from "./pages/SuiteRoom";
 import MeetingsEvents from "./pages/MeetingsEvents";
 import Wellness from "./pages/Wellness";
 import AdminTest from "./pages/AdminTest";
-import RoomSummary from "./pages/RoomSummary/RoomSummary";
-import BookingSuccess from "./pages/RoomSummary/BookingSuccess";
-import BookingFailed from "./pages/RoomSummary/BookingFailed";
+import RoomSummary from "./pages/room-summary/RoomSummary";
+import BookingSuccess from "./pages/room-summary/BookingSuccess";
+import BookingFailed from "./pages/room-summary/BookingFailed";
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import RoomCard from "./RoomCard";
-import "../../styles/RoomSelect/roomSelect.css";
+import "../../styles/pages/room-select/room-select.css";
 
 const RoomList = ({ rooms = [], totalGuests, fromDate, toDate }) => {
   return (
