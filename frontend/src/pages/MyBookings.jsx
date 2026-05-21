@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE } from "../config/api";
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
 import { useAuth } from "../context/AuthContext";
@@ -14,53 +15,6 @@ const ROOM_IMAGES = {
   suite: suiteImg,
 };
 
-const MOCK_BOOKINGS = [
-  {
-    bookingId: 1001,
-    roomNumber: 301,
-    roomType: "suite",
-    status: "confirmed",
-    fromDate: "2026-06-10",
-    toDate: "2026-06-13",
-    totalCost: 360.0,
-  },
-  {
-    bookingId: 1002,
-    roomNumber: 201,
-    roomType: "superior",
-    status: "confirmed",
-    fromDate: "2026-07-05",
-    toDate: "2026-07-08",
-    totalCost: 255.0,
-  },
-  {
-    bookingId: 1003,
-    roomNumber: 101,
-    roomType: "single",
-    status: "pending",
-    fromDate: "2026-08-01",
-    toDate: "2026-08-03",
-    totalCost: 100.0,
-  },
-  {
-    bookingId: 1004,
-    roomNumber: 202,
-    roomType: "superior",
-    status: "cancelled",
-    fromDate: "2026-05-01",
-    toDate: "2026-05-04",
-    totalCost: 255.0,
-  },
-  {
-    bookingId: 1005,
-    roomNumber: 102,
-    roomType: "single",
-    status: "confirmed",
-    fromDate: "2026-04-10",
-    toDate: "2026-04-12",
-    totalCost: 100.0,
-  },
-];
 
 const TABS = ["All", "Upcoming", "Past", "Cancelled"];
 
@@ -120,7 +74,7 @@ function StatusBadge({ status }) {
   );
 }
 
-function BookingCard({ booking }) {
+function BookingCard({ booking, onCancel }) {
   const nights = nightCount(booking.fromDate, booking.toDate);
   const canCancel =
     booking.status !== "cancelled" && new Date(booking.fromDate) > new Date();
@@ -171,7 +125,7 @@ function BookingCard({ booking }) {
             View room
           </Link>
           {canCancel && (
-            <button type="button" className="mb-btn-cancel">
+            <button type="button" className="mb-btn-cancel" onClick={() => onCancel(booking.bookingId)}>
               Cancel booking
             </button>
           )}
@@ -183,7 +137,28 @@ function BookingCard({ booking }) {
 
 function MyBookingsContent({ user }) {
   const [activeTab, setActiveTab] = useState("All");
-  const filtered = filterBookings(MOCK_BOOKINGS, activeTab);
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/bookings/getBookings`, { credentials: "include" })
+      .then((r) => r.json())
+      .then((res) => {
+        if (res.success && res.data) {
+          setBookings(res.data.map((b) => ({ ...b, roomType: b.room?.type || "single" })));
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleCancel = async (bookingId) => {
+    await fetch(`${API_BASE}/bookings/cancelBooking/${bookingId}`, { credentials: "include" });
+    setBookings((prev) =>
+      prev.map((b) => b.bookingId === bookingId ? { ...b, status: "cancelled" } : b)
+    );
+  };
+
+  const filtered = filterBookings(bookings, activeTab);
 
   return (
     <main className="mb-main">
@@ -208,7 +183,9 @@ function MyBookingsContent({ user }) {
             ))}
           </div>
 
-          {filtered.length === 0 ? (
+          {loading ? (
+            <p className="mb-empty-text">Loading bookings...</p>
+          ) : filtered.length === 0 ? (
             <div className="mb-empty">
               <p className="mb-empty-icon">🛎️</p>
               <p className="mb-empty-text">No {activeTab.toLowerCase()} bookings found.</p>
@@ -219,7 +196,7 @@ function MyBookingsContent({ user }) {
           ) : (
             <div className="mb-list">
               {filtered.map((b) => (
-                <BookingCard key={b.bookingId} booking={b} />
+                <BookingCard key={b.bookingId} booking={b} onCancel={handleCancel} />
               ))}
             </div>
           )}

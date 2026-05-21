@@ -10,21 +10,9 @@ function BookingSuccess() {
   const [sessionData, setSessionData] = useState(null);
 
   useEffect(() => {
-    if (!sessionId) {
-      setLoading(false);
-      return;
-    }
-
-    fetch(`http://localhost:3000/api/bookings/session/${sessionId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSessionData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error retrieving checkout session data:", err);
-        setLoading(false);
-      });
+    setLoading(false);
+    const timer = setTimeout(() => navigate("/my-bookings"), 4000);
+    return () => clearTimeout(timer);
   }, [sessionId]);
 
   const styles = {
@@ -214,13 +202,16 @@ function BookingSuccess() {
         </div>
       </div>
 
+      <p style={{ textAlign: "center", color: "#888", fontSize: "13px", marginTop: "20px" }}>
+        Redirecting to your bookings in a few seconds...
+      </p>
       <button
         style={styles.primaryBtn}
         onMouseEnter={(e) => (e.target.style.backgroundColor = "#B81920")}
         onMouseLeave={(e) => (e.target.style.backgroundColor = "#D9232A")}
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/my-bookings")}
       >
-        Go to My Dashboard
+        View My Bookings
       </button>
     </div>
   );

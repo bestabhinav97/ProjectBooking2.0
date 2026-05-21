@@ -91,7 +91,7 @@ export default function RoomPageModifyBar() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/rooms/getAvailableRoom",
+        "/rooms/getAvailableRoom",
         {
           method: "POST",
           headers: {

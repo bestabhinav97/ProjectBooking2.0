@@ -154,7 +154,7 @@ function RoomSummary() {
 
     try {
       // Replace URL with your correct backend target API environment address
-      const response = await fetch("http://localhost:3000/bookings/initiate", {
+      const response = await fetch("/bookings/initiate", {
         credentials: "include",
         method: "POST",
         headers: {

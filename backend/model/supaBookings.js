@@ -108,7 +108,7 @@ module.exports.getUserBookings = async (userId) => {
   try {
     const { data, error } = await supabase
       .from('bookings')
-      .select('*')
+      .select('*, room(type)')
       .eq('userId', userId);
 
     if (error) throw error;

@@ -25,7 +25,7 @@ function AdminReservations() {
   const fetchAllReservations = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/bookings/admin/allBookings", {
+      const response = await fetch("/bookings/admin/allBookings", {
         method: "GET",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -45,7 +45,7 @@ function AdminReservations() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this reservation record?")) return;
     try {
-      const response = await fetch(`http://localhost:3000/bookings/admin/delete/${id}`, {
+      const response = await fetch(`/bookings/admin/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -82,7 +82,7 @@ function AdminReservations() {
   // Save changes handler
   const handleSaveSubmit = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/bookings/admin/update/${id}`, {
+      const response = await fetch(`/bookings/admin/update/${id}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
