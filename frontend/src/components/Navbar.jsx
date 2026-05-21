@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ isOpen, onClose }) {
   return (
-    <nav className="navbar">
+    <nav className={`navbar${isOpen ? " navbar--open" : ""}`}>
       <ul className="nav-links">
         <li>
-          <Link to="/packages-offers">Packages & Offers</Link>
+          <Link to="/packages-offers" onClick={onClose}>Packages & Offers</Link>
         </li>
 
         <li>
-          <Link to="/rooms">Rooms</Link>
+          <Link to="/rooms" onClick={onClose}>Rooms</Link>
         </li>
 
         <li>
-          <Link to="/meetings-events">Meetings & Events</Link>
+          <Link to="/meetings-events" onClick={onClose}>Meetings & Events</Link>
         </li>
 
         <li>
-          <Link to="/wellness">Wellness</Link>
+          <Link to="/wellness" onClick={onClose}>Wellness</Link>
         </li>
 
         <li className="has-dropdown">

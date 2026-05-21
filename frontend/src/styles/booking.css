@@ -77,6 +77,118 @@
     "opsz" 40;
 }
 
+@media (max-width: 768px) {
+  .booking-wrapper {
+    width: calc(100% - 32px);
+    top: 40px;
+  }
+
+  .booking-box {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .booking-large-field {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .book-button {
+    width: 100%;
+    height: 46px;
+    font-size: 18px;
+    border-radius: 12px;
+  }
+
+  .months-wrapper {
+    flex-direction: row;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .date-popup {
+    padding: 16px 14px;
+  }
+
+  .month-block h2 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(7, 26px);
+    column-gap: 1px;
+    row-gap: 3px;
+  }
+
+  .calendar-grid button {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .calendar-grid span {
+    font-size: 10px;
+  }
+
+  .date-done-button {
+    width: 90px;
+    height: 40px;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  .guest-popup {
+    width: 100%;
+    margin-left: 0;
+    padding: 20px 20px;
+    border-radius: 16px;
+  }
+
+  .guest-row {
+    padding: 14px 0;
+  }
+
+  .guest-row h3 {
+    font-size: 16px;
+  }
+
+  .guest-row p {
+    font-size: 12px;
+  }
+
+  .counter {
+    gap: 12px;
+  }
+
+  .counter button {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .counter span {
+    font-size: 16px;
+    min-width: 18px;
+  }
+
+  .guest-done-button {
+    width: 90px;
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+/* On very small screens show only 1 month */
+@media (max-width: 440px) {
+  .month-block:nth-child(2) {
+    display: none;
+  }
+}
+
 /* Date popup */
 .date-popup {
   margin-top: 20px;
@@ -85,14 +197,47 @@
   padding: 26px 32px;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
   font-family: "Montserrat", sans-serif;
+  width: max-content;
+  max-width: calc(100vw - 20px);
+  overflow-x: hidden;
+}
+
+.calendar-nav-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cal-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--primary-text);
+  padding: 0 4px;
+  align-self: center;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.cal-nav-btn:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.cal-nav-btn:disabled {
+  opacity: 0.2;
+  cursor: default;
 }
 
 .months-wrapper {
   display: flex;
-  gap: 55px;
+  gap: 40px;
   align-items: flex-start;
   justify-content: center;
 }
+
 
 .month-block h2 {
   text-align: center;
@@ -105,7 +250,8 @@
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 36px);
-  gap: 8px;
+  column-gap: 4px;
+  row-gap: 6px;
   justify-content: center;
   align-items: center;
 }
@@ -121,22 +267,39 @@
   width: 36px;
   height: 36px;
   border: none;
-  border-radius: 13px;
+  border-radius: 50%;
   background: transparent;
   color: var(--primary-text);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: background 0.15s ease, color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
 }
 
-.calendar-grid button:hover {
+.calendar-grid button:hover:not(.selected-date) {
   background: var(--topbar-bg);
 }
 
 .selected-date {
   background: var(--primary-text) !important;
   color: var(--white) !important;
+  border-radius: 50% !important;
+}
+
+.in-range-date {
+  background: rgba(77, 0, 27, 0.1) !important;
+  color: var(--primary-text) !important;
+  border-radius: 0 !important;
+}
+
+.in-range-date:hover {
+  background: rgba(77, 0, 27, 0.18) !important;
 }
 
 .date-done-button,
@@ -169,6 +332,7 @@
   margin-top: 20px;
   margin-left: auto;
   width: 420px;
+  max-width: calc(100vw - 20px);
   background: var(--white);
   border-radius: 22px;
   padding: 28px 32px;

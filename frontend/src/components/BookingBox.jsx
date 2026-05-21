@@ -13,11 +13,24 @@ function BookingBox() {
   const [rooms, setRooms] = useState(1);
   const navigate = useNavigate();
 
-  const months = [
-    { label: "May 2026", year: 2026, month: 5, days: 31, startOffset: 4 },
-    { label: "June 2026", year: 2026, month: 6, days: 30, startOffset: 0 },
-    { label: "July 2026", year: 2026, month: 7, days: 31, startOffset: 2 },
-  ];
+  const [monthOffset, setMonthOffset] = useState(0);
+
+  const BASE_YEAR = 2026;
+  const BASE_MONTH = 5; // May
+
+  function getMonthData(year, month) {
+    const days = new Date(year, month, 0).getDate();
+    const dayOfWeek = new Date(year, month - 1, 1).getDay(); // 0=Sun
+    const startOffset = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Mon=0
+    const names = ["January","February","March","April","May","June",
+                   "July","August","September","October","November","December"];
+    return { label: `${names[month - 1]} ${year}`, year, month, days, startOffset };
+  }
+
+  const months = [0, 1].map(i => {
+    const total = (BASE_MONTH - 1) + monthOffset + i;
+    return getMonthData(BASE_YEAR + Math.floor(total / 12), (total % 12) + 1);
+  });
 
   function buildDateString(year, month, day) {
     return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
@@ -220,6 +233,16 @@ function BookingBox() {
 
       {dateOpen && (
         <div className="date-popup">
+          <div className="calendar-nav-wrapper">
+            <button
+              className="cal-nav-btn"
+              onClick={() => setMonthOffset(o => Math.max(0, o - 1))}
+              disabled={monthOffset === 0}
+              aria-label="Previous month"
+            >
+              &#8249;
+            </button>
+
           <div className="months-wrapper">
             {months.map((month) => (
               <div className="month-block" key={month.label}>
@@ -246,17 +269,27 @@ function BookingBox() {
                       day,
                     );
 
+                    const isStart = dateString === checkIn;
+                    const isEnd = dateString === checkOut;
+                    const isInRange =
+                      checkIn &&
+                      checkOut &&
+                      dateString > checkIn &&
+                      dateString < checkOut;
+
+                    const className = isStart || isEnd
+                      ? "selected-date"
+                      : isInRange
+                      ? "in-range-date"
+                      : "";
+
                     return (
                       <button
                         key={dateString}
                         onClick={() =>
                           handleDateClick(month.year, month.month, day)
                         }
-                        className={
-                          dateString === checkIn || dateString === checkOut
-                            ? "selected-date"
-                            : ""
-                        }
+                        className={className}
                       >
                         {day}
                       </button>
@@ -265,6 +298,15 @@ function BookingBox() {
                 </div>
               </div>
             ))}
+          </div>
+
+            <button
+              className="cal-nav-btn"
+              onClick={() => setMonthOffset(o => o + 1)}
+              aria-label="Next month"
+            >
+              &#8250;
+            </button>
           </div>
 
           <button

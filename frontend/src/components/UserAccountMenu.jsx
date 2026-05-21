@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { API_BASE } from "../config/api";
@@ -19,6 +20,20 @@ function displayFirstName(user) {
 export default function UserAccountMenu() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, []);
 
   const logout = async () => {
     try {
@@ -42,8 +57,8 @@ export default function UserAccountMenu() {
       : null;
 
   return (
-    <div className="has-dropdown account-menu-slot">
-      <button type="button" className="account-menu-trigger-btn">
+    <div className={`has-dropdown account-menu-slot${open ? " dropdown-open" : ""}`} ref={ref}>
+      <button type="button" className="account-menu-trigger-btn" onClick={() => setOpen(o => !o)}>
         {avatarSrc ? (
           <img
             key={avatarSrc.slice(0, 80)}

@@ -94,10 +94,23 @@
   text-align: left;
 }
 
-.has-dropdown:hover .dropdown {
+.has-dropdown:hover .dropdown,
+.has-dropdown.dropdown-open .dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+@media (max-width: 1329px) {
+  .account-menu-slot:hover .dropdown {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .account-menu-slot.dropdown-open .dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .dropdown li {
@@ -123,11 +136,76 @@
   background: var(--topbar-bg);
 }
 
-/* Keep nav dropdowns open when moving focus inside (keyboard) */
-.has-dropdown:focus-within .dropdown {
+/* Keep nav dropdowns open when moving focus inside (keyboard) — not account menu */
+.navbar .has-dropdown:focus-within .dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+@media (max-width: 1329px) {
+  .navbar {
+    display: none;
+    position: fixed;
+    top: 129px;
+    left: 0;
+    width: 100%;
+    max-height: calc(100vh - 129px);
+    overflow-y: auto;
+    background: var(--header-bg);
+    border-top: 1px solid var(--border-soft);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    z-index: 997;
+  }
+
+  .navbar--open {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 0 16px;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a,
+  .nav-links a:visited {
+    padding: 13px 28px;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .nav-links > li > a::after {
+    display: none;
+  }
+
+  .navbar .dropdown {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: var(--topbar-bg);
+    min-width: 100%;
+    padding: 0;
+  }
+
+  .navbar .dropdown a {
+    padding: 11px 40px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13px;
+  }
+
+  .navbar .has-dropdown:hover .dropdown,
+  .navbar .has-dropdown:focus-within .dropdown {
+    transform: none;
+  }
 }
 
 /* Account menu — same .has-dropdown + .dropdown pattern, right-aligned in header */

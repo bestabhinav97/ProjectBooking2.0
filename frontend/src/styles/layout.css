@@ -10,6 +10,9 @@
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   color: var(--primary-text);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .topbar-language {
@@ -92,8 +95,9 @@
   padding: 0 54px;
   color: var(--primary-text);
   font-family: "Montserrat", sans-serif;
-  position: relative;
-  z-index: 50;
+  position: sticky;
+  top: 37px;
+  z-index: 999;
 }
 
 .header-brand {
@@ -200,6 +204,56 @@
   background: #333;
   transform: scale(1.05);
 }
+/* Header right slot */
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  justify-self: end;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-text);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburger--open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger--open span:nth-child(2) { opacity: 0; }
+.hamburger--open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+@media (max-width: 1329px) {
+  .header {
+    padding: 0 20px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .login-text {
+    display: none;
+  }
+}
+
 /* Secondary page header transition */
 .rooms-page,
 .offers-page,

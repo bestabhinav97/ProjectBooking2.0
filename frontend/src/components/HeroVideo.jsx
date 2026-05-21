@@ -4,11 +4,12 @@ import BookingBox from "./BookingBox";
 function HeroVideo() {
   return (
     <section className="hero-video">
-      <video autoPlay loop muted playsInline>
-        <source src={video} type="video/mp4" />
-      </video>
-
-      <div className="overlay"></div>
+      <div className="hero-video-media">
+        <video autoPlay loop muted playsInline>
+          <source src={video} type="video/mp4" />
+        </video>
+        <div className="overlay"></div>
+      </div>
 
       <BookingBox />
     </section>

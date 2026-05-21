@@ -56,3 +56,19 @@
   object-fit: contain;
   padding-top: 75px;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    grid-template-columns: 1fr;
+    padding: 50px 24px;
+    gap: 32px;
+  }
+
+  .footer-middle {
+    padding-top: 0;
+  }
+
+  .footer-right {
+    display: none;
+  }
+}
