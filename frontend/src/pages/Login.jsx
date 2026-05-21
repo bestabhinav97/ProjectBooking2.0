@@ -71,7 +71,7 @@ function Login() {
               strokeWidth="2"
             />
           </svg>
-          Go back to Hotel.com
+          <span>Go back to Hotel.com</span>
         </Link>
         <div className="login-logo-center">
           <Link to="/" className="login-logo-text">

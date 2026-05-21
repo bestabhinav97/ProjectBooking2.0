@@ -23,14 +23,21 @@
 .login-page-header {
   font-family: "Montserrat", sans-serif;
   background: var(--header-bg, #fff);
-  height: 92px;
-  padding: 0 54px;
+  height: 72px;
+  padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   position: relative;
   z-index: 50;
   color: var(--primary-text);
+}
+
+@media (min-width: 768px) {
+  .login-page-header {
+    height: 92px;
+    padding: 0 54px;
+  }
 }
 
 .login-back-link {
@@ -53,6 +60,12 @@
   width: 1rem;
   height: 1rem;
   flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .login-back-link span {
+    display: none;
+  }
 }
 
 .login-logo-center {
@@ -296,6 +309,11 @@
   flex-direction: column;
 }
 
+
+/* Hide the main site header — login page has its own header with back link */
+.login-page .header {
+  display: none;
+}
 
 .login-page .header-login {
   visibility: hidden;
