@@ -101,7 +101,7 @@
 /* ===== RESPONSIVE ===== */
 
 /* Jump straight from 3-col to 1-col — avoids the lone card in row 2 problem */
-@media (max-width: 1024px) {
+@media (max-width: 1528px) {
   .offers-page {
     padding: 0 32px 80px;
   }
