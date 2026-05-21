@@ -10,9 +10,17 @@ function BookingSuccess() {
   const [sessionData, setSessionData] = useState(null);
 
   useEffect(() => {
-    setLoading(false);
-    const timer = setTimeout(() => navigate("/my-bookings"), 4000);
-    return () => clearTimeout(timer);
+    if (!sessionId) {
+      setLoading(false);
+      return;
+    }
+
+    fetch(`/bookings/confirm-session/${sessionId}`, { credentials: "include" })
+      .finally(() => {
+        setLoading(false);
+        const timer = setTimeout(() => navigate("/my-bookings"), 3000);
+        return () => clearTimeout(timer);
+      });
   }, [sessionId]);
 
   const styles = {

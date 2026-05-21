@@ -312,6 +312,27 @@ module.exports.updateReservation = async (req, res, next) => {
 /**
  * deleteReservation - Hard erase a reservation logging entry via Admin Action
  */
+module.exports.confirmSession = async (req, res, next) => {
+  try {
+    const { sessionId } = req.params;
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    if (session.payment_status !== "paid") {
+      return res.status(400).json({ success: false, message: "Payment not completed" });
+    }
+
+    const bookingId = session.metadata?.bookingId;
+    if (!bookingId) {
+      return res.status(400).json({ success: false, message: "No booking linked to session" });
+    }
+
+    await bookingModel.confirmBooking(bookingId);
+    return res.status(200).json({ success: true, bookingId });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports.deleteReservation = async (req, res, next) => {
   try {
     const { bookingId } = req.params;

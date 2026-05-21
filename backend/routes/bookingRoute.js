@@ -41,6 +41,7 @@ bookingRouter.post("/initiate", bookingController.initiateBooking);
  * RESPONSE: Array of user's bookings with details (room, dates, status, cost)
  */
 bookingRouter.get("/getBookings", bookingController.getUserBookings);
+bookingRouter.get("/confirm-session/:sessionId", bookingController.confirmSession);
 
 /**
  * GET /bookings/cancelBooking/:bookingId
