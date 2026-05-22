@@ -1,0 +1,118 @@
+/* Quick Metrics Block Layout Setup */
+.stats-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card-item {
+  background-color: #ffffff;
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  color: #111111;
+  margin: 0 0 6px 0;
+  font-weight: 700;
+}
+
+.stat-trend {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.stat-trend.positive { color: #006644; }
+.stat-trend.neutral { color: #555555; }
+
+/* Dashboard Side-by-Side Panel Splits */
+.dashboard-split-panels {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.panel-box-item {
+  background-color: #ffffff;
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.panel-box-item.main-split {
+  flex: 2;
+  min-width: 400px;
+}
+
+.panel-box-item.side-split {
+  flex: 1;
+  min-width: 280px;
+}
+
+.panel-box-item h3 {
+  font-size: 1.1rem;
+  color: #222222;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* Simulated Metric Bar Render Blocks */
+.placeholder-chart-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 180px;
+  padding: 0 10px;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.bar-column-fill {
+  width: 12%;
+  background-color: #0052cc;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+  transition: height 0.5s ease;
+}
+
+.bar-column-fill::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #666666;
+}
+
+/* Category metric breakdown rows */
+.category-metric-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-metric-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f2f5;
+  font-size: 0.9rem;
+}
+
+.category-metric-list li:last-child {
+  border-bottom: none;
+}

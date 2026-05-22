@@ -102,4 +102,16 @@ bookingRouter.delete(
   bookingController.deleteReservation
 );
 
+/**
+ * GET /bookings/admin/dashboard-stats
+ * Returns aggregated stats for the admin dashboard panel
+ * REQUIRES: JWT authentication AND Admin Role verification
+ */
+bookingRouter.get(
+  "/admin/dashboard-stats",
+  authMiddleWear.isAdmin,
+  bookingController.getDashboardStats
+);
+
+
 module.exports = bookingRouter;

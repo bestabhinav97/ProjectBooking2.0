@@ -20,6 +20,7 @@ import MeetingsEvents from "./pages/MeetingsEvents";
 import Wellness from "./pages/Wellness";
 import AdminTest from "./pages/AdminTest";
 import AdminReservations from "./pages/AdminReservations";
+import AdminDashboard from "./pages/AdminDashboard";
 import RoomSummary from "./pages/room-summary/RoomSummary";
 import BookingSuccess from "./pages/room-summary/BookingSuccess";
 import BookingFailed from "./pages/room-summary/BookingFailed";
@@ -48,6 +49,7 @@ function App() {
           <Route path="/wellness" element={<Wellness />} />
           <Route path="/admin-test" element={<AdminTest />} />
           <Route path="/admin/reservations" element={<AdminReservations />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/booking/summary" element={<RoomSummary />} />
           <Route path="/booking-success" element={<BookingSuccess />} />
           <Route path="/booking-failed" element={<BookingFailed />} />

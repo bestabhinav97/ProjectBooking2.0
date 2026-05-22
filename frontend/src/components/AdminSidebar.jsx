@@ -13,7 +13,7 @@ function AdminSidebar() {
 
         <nav className="admin-sidebar-nav">
           {/* Use proper, semantic route linking layout paths */}
-          <Link to="/admin">Dashboard</Link>
+          <Link to="/admin/dashboard">Dashboard</Link>
           <Link to="/admin/reservations">Reservations</Link>
           <Link to="/admin/guests">Guests</Link>
           <Link to="/admin/rooms">Rooms</Link>

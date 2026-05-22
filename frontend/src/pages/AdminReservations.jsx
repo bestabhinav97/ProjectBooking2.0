@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AdminSidebar from "../components/AdminSidebar";
 import "../styles/AdminReservations.css";
 import { API_BASE } from "../config/api";
