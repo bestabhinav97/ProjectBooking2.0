@@ -10,6 +10,10 @@ import lunchImage from "../assets/Hotel Lunch.png";
 import dinnerImage from "../assets/Hotel Dinner.png";
 import barImage from "../assets/Hotel Bar.png";
 
+import RBImage from "../assets/Restaurant.png";
+import RBImage2 from "../assets/Bar 1.png";
+import RBImage3 from "../assets/Bar 2.png";
+
 import "../styles/restaurantBar.css";
 
 function RestaurantBar() {
@@ -31,107 +35,119 @@ function RestaurantBar() {
   }, [location]);
 
   return (
-    <div className="restaurant-page">
+    <>
       <TopBar />
       <Header />
 
-      <main>
-        <section className="restaurant-hero">
-          <div className="restaurant-hero-content">
-            <p className="restaurant-kicker">Taste & atmosphere</p>
+      <main className="restaurant-bar-page">
+        <section className="restaurant-slideshow">
+          <img src={breakfastImage} alt="Hotel breakfast buffet" />
+          <img src={lunchImage} alt="Hotel lunch dining" />
+          <img src={dinnerImage} alt="Hotel dinner restaurant" />
+          <img src={barImage} alt="Hotel bar and after work drinks" />
+          <img src={RBImage2} alt="Hotel bar and after work drinks" />
+          <img src={RBImage3} alt="Hotel bar and after work drinks" />
+        </section>
+
+        <div className="restaurant-line-break"></div>
+
+        <section className="restaurant-intro-section">
+          <div className="restaurant-intro-content">
             <h1>Restaurant & Bar</h1>
+
             <p>
-              Enjoy breakfast, lunch, dinner and after work moments in a warm
-              hotel atmosphere.
+              Enjoy a complete dining experience from early breakfast to evening
+              drinks. Our restaurant and bar offer warm service, fresh dishes and
+              a calm hotel atmosphere throughout the day.
+            </p>
+
+            <p>
+              Whether you are staying with us, visiting for a meeting, or meeting
+              friends after work, our food and drink spaces are designed for
+              comfort, taste and easy moments together.
             </p>
           </div>
         </section>
 
-        <section className="restaurant-main-section">
-          <div className="restaurant-intro">
-            <p className="restaurant-cursive">Food made for the moment</p>
-            <h2>Restaurant & Bar</h2>
-            <p>
-              Choose the moment that fits your stay. Start the morning with
-              breakfast, enjoy lunch, sit down for dinner or meet friends after
-              work.
-            </p>
-          </div>
+        <section className="restaurant-options-section">
+          <h2>Food & Drinks</h2>
 
-          <div className="restaurant-section-list">
-            <article id="breakfast" className="restaurant-detail-section">
-              <img
-                src={breakfastImage}
-                alt="Hotel breakfast buffet with bread, fruit, eggs and warm dishes"
-                className="restaurant-section-image"
-              />
+          <div className="restaurant-options-grid">
+            <article id="breakfast" className="restaurant-option-card">
+              <img src={breakfastImage} alt="Breakfast buffet at the hotel" />
 
-              <div className="restaurant-section-content">
-                <p className="restaurant-cursive">Morning comfort</p>
-                <h2>Breakfast</h2>
-                <p>
-                  Begin the day with a fresh hotel breakfast including warm
-                  dishes, coffee, fruit, bread and lighter options.
-                </p>
-              </div>
+              <h3>Breakfast</h3>
+
+              <p>
+                Start the day with a generous hotel breakfast including warm
+                dishes, fresh bread, coffee, fruit and lighter morning options.
+              </p>
+
+              
             </article>
 
-            <article id="lunch" className="restaurant-detail-section">
-              <img
-                src={lunchImage}
-                alt="Hotel lunch buffet with salads, wraps, pasta and fresh dishes"
-                className="restaurant-section-image"
-              />
+            <article id="lunch" className="restaurant-option-card">
+              <img src={lunchImage} alt="Lunch buffet at the hotel" />
 
-              <div className="restaurant-section-content">
-                <p className="restaurant-cursive">Midday dining</p>
-                <h2>Lunch</h2>
-                <p>
-                  Enjoy a relaxed lunch with seasonal dishes, lighter meals and
-                  fresh options for guests, meetings and visitors.
-                </p>
-              </div>
+              <h3>Lunch</h3>
+
+              <p>
+                Enjoy a relaxed lunch with seasonal meals, salads and fresh
+                options suitable for guests, meetings and everyday visitors.
+              </p>
+
+              
             </article>
 
-            <article id="dinner" className="restaurant-detail-section">
-              <img
-                src={dinnerImage}
-                alt="Hotel dinner buffet with warm dishes, salmon, potatoes and salads"
-                className="restaurant-section-image"
-              />
+            <article id="dinner" className="restaurant-option-card">
+              <img src={dinnerImage} alt="Dinner service at the hotel" />
 
-              <div className="restaurant-section-content">
-                <p className="restaurant-cursive">Evening taste</p>
-                <h2>Dinner</h2>
-                <p>
-                  Sit down for dinner in a comfortable setting with carefully
-                  prepared dishes and a calm hotel atmosphere.
-                </p>
-              </div>
+              <h3>Dinner</h3>
+
+              <p>
+                Sit down for dinner in a comfortable restaurant setting with
+                carefully prepared dishes and a calm evening atmosphere.
+              </p>
+
+              
             </article>
 
-            <article id="party" className="restaurant-detail-section">
-              <img
-                src={barImage}
-                alt="Hotel bar after work party with drinks and snacks"
-                className="restaurant-section-image"
-              />
+            <article id="party" className="restaurant-option-card">
+              <img src={barImage} alt="Hotel bar after work party" />
 
-              <div className="restaurant-section-content">
-                <p className="restaurant-cursive">After work</p>
-                <h2>After Work Party</h2>
-                <p>
-                  Meet friends or colleagues after work for drinks, snacks and a
-                  more social evening in the bar.
-                </p>
-              </div>
+              <h3>After Work Party</h3>
+
+              <p>
+                Meet friends or colleagues after work for drinks, snacks and a
+                more social evening in our hotel bar.
+              </p>
+
+              
             </article>
           </div>
+        </section>
+
+        {/* <section className="restaurant-gallery-section">
+          <div className="restaurant-gallery-grid">
+            <img src={breakfastImage} alt="Breakfast selection" />
+            <img src={lunchImage} alt="Lunch selection" />
+            <img src={dinnerImage} alt="Dinner selection" />
+            <img src={barImage} alt="Bar drinks selection" />
+          </div>
+        </section>*/}
+
+        <section className="restaurant-transition">
+          <div className="restaurant-transition-line"></div>
+
+          <p>
+            From breakfast to after work, our restaurant and bar are made for
+            relaxed meals, good conversations and memorable hotel moments.
+          </p>
         </section>
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
 
