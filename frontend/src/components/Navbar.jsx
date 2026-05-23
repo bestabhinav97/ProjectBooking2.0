@@ -1,47 +1,61 @@
 import { Link } from "react-router-dom";
 
-function Navbar({ isOpen, onClose }) {
+function Navbar() {
   return (
-    <nav className={`navbar${isOpen ? " navbar--open" : ""}`}>
+    <nav className="navbar">
       <ul className="nav-links">
         <li>
-          <Link to="/packages-offers" onClick={onClose}>Packages & Offers</Link>
+          <Link to="/packages-offers">Packages & Offers</Link>
         </li>
 
         <li>
-          <Link to="/rooms" onClick={onClose}>Rooms</Link>
+          <Link to="/rooms">Rooms</Link>
         </li>
 
         <li>
-          <Link to="/meetings-events" onClick={onClose}>Meetings & Events</Link>
+          <Link to="/meetings-events">Meetings & Events</Link>
         </li>
 
         <li>
-          <Link to="/wellness" onClick={onClose}>Wellness</Link>
+          <Link to="/wellness">Wellness</Link>
         </li>
 
         <li className="has-dropdown">
-          <a href="#" className="has-arrow">
+          <Link to="/restaurant-bar" className="has-arrow">
             Restaurant & Bar
-          </a>
+          </Link>
 
           <ul className="dropdown">
-            <li><a href="#">Breakfast</a></li>
-            <li><a href="#">Lunch</a></li>
-            <li><a href="#">Dinner</a></li>
-            <li><a href="#">After Work Party</a></li>
+            <li>
+              <Link to="/restaurant-bar#breakfast">Breakfast</Link>
+            </li>
+            <li>
+              <Link to="/restaurant-bar#lunch">Lunch</Link>
+            </li>
+            <li>
+              <Link to="/restaurant-bar#dinner">Dinner</Link>
+            </li>
+            <li>
+              <Link to="/restaurant-bar#party">After Work Party</Link>
+            </li>
           </ul>
         </li>
 
         <li className="has-dropdown">
-          <a href="#" className="has-arrow">
+          <Link to="/about" className="has-arrow">
             About Us
-          </a>
+          </Link>
 
           <ul className="dropdown">
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Find Us</a></li>
-            <li><a href="#">Company Information</a></li>
+            <li>
+              <Link to="/about#contact">Contact Us</Link>
+            </li>
+            <li>
+              <Link to="/about#find">Find Us</Link>
+            </li>
+            <li>
+              <Link to="/about#company">Company Information</Link>
+            </li>
           </ul>
         </li>
       </ul>
