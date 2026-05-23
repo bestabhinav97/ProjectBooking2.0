@@ -18,6 +18,8 @@ import RoomSelect from "./pages/room-select/RoomSelect";
 import SuiteRoom from "./pages/SuiteRoom";
 import MeetingsEvents from "./pages/MeetingsEvents";
 import Wellness from "./pages/Wellness";
+import RestaurantBar from "./pages/RestaurantBar";
+import AboutUs from "./pages/AboutUs";
 import AdminTest from "./pages/AdminTest";
 import AdminReservations from "./pages/AdminReservations";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -47,6 +49,8 @@ function App() {
           <Route path="/rooms/suite" element={<SuiteRoom />} />
           <Route path="/meetings-events" element={<MeetingsEvents />} />
           <Route path="/wellness" element={<Wellness />} />
+          <Route path="/restaurant-bar" element={<RestaurantBar />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/admin-test" element={<AdminTest />} />
           <Route path="/admin/reservations" element={<AdminReservations />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
