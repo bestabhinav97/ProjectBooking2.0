@@ -1,0 +1,263 @@
+.join-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--primary-text);
+  color: var(--primary-text);
+}
+
+.join-page .header-login {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.error-banner {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--accent);
+}
+
+.join-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem 6rem;
+}
+
+.join-card {
+  width: 100%;
+  max-width: 72rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--white);
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.join-form-section {
+  width: 100%;
+  padding: 2rem;
+  font-family: "Montserrat", sans-serif;
+  background: var(--white);
+}
+
+.join-form-intro {
+  margin-bottom: 2rem;
+}
+
+.join-cursive {
+  margin: 0 0 0.5rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--primary-text);
+}
+
+.join-form-intro h1 {
+  margin: 0 0 1rem;
+  color: var(--accent);
+  font-size: 2.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+.join-form-intro p {
+  margin: 0;
+  max-width: 34rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--primary-text);
+}
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.join-section-title {
+  margin: 0;
+  color: var(--primary-text);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.join-grid-two {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.join-grid-three {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.join-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.join-field label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-text);
+}
+
+.join-field input,
+.join-field select,
+.join-grid-three select {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.05rem;
+  color: var(--primary-text);
+  background: var(--white);
+}
+
+.join-field input::placeholder {
+  color: var(--primary-text);
+  opacity: 0.45;
+}
+
+.join-field input:focus,
+.join-field select:focus,
+.join-grid-three select:focus {
+  outline: none;
+  border-color: var(--primary-text);
+  box-shadow: 0 0 0 2px rgba(77, 0, 27, 0.15);
+}
+
+.join-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--primary-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.join-checkbox input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+  accent-color: var(--primary-text);
+  flex-shrink: 0;
+}
+
+.join-primary-btn,
+.join-secondary-btn {
+  width: 100%;
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.join-primary-btn {
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: var(--white);
+}
+
+.join-primary-btn:hover {
+  background: var(--primary-text);
+}
+
+.join-info-section {
+  width: 100%;
+  padding: 2rem;
+  background: var(--white);
+}
+
+.join-info-inner {
+  min-height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--topbar-bg);
+  text-align: center;
+}
+
+.join-info-inner h2 {
+  margin: 0 0 2rem;
+  color: var(--primary-text);
+  font-size: 1.875rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.join-info-inner p {
+  margin: 0 0 2rem;
+  max-width: 22rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--primary-text);
+}
+
+.join-secondary-btn {
+  background: var(--primary-text);
+  color: var(--white);
+}
+
+.join-secondary-btn:hover {
+  background: var(--accent);
+}
+
+@media (min-width: 768px) {
+  .join-main {
+    padding: 3rem 2rem 8rem;
+  }
+
+  .join-card {
+    flex-direction: row;
+  }
+
+  .join-form-section {
+    width: 55%;
+    padding: 3rem;
+  }
+
+  .join-info-section {
+    width: 45%;
+    padding: 3.5rem;
+  }
+
+  .join-info-inner {
+    padding: 3rem;
+  }
+
+  .join-grid-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .join-grid-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

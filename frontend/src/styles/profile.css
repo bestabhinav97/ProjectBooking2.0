@@ -1,0 +1,110 @@
+/* Profile page — only extras inside join-page / join-card layout */
+
+.join-page .profile-avatar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.join-page .profile-avatar-preview {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--primary-text);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--border-soft);
+}
+
+.join-page .profile-avatar-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.join-page .profile-avatar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.join-page .profile-upload-label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  background: var(--accent);
+  color: var(--white);
+  transition: 0.2s ease;
+  width: fit-content;
+}
+
+.join-page .profile-upload-label:hover {
+  background: var(--primary-text);
+}
+
+.join-page .profile-upload-label input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.join-page .profile-remove-photo {
+  background: none;
+  border: none;
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.25rem 0;
+  text-align: left;
+}
+
+.join-page .profile-remove-photo:hover {
+  color: var(--primary-text);
+}
+
+.join-page .join-field input:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.join-page .profile-loading {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  text-align: center;
+}
+
+.join-page .profile-success-banner {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary-text);
+  background: var(--topbar-bg);
+  border: 1px solid var(--border-soft);
+}
+
+.join-page .join-info-inner .profile-aside-link-alt {
+  margin-top: 0.75rem;
+}

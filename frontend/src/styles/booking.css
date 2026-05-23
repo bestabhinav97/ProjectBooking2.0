@@ -1,0 +1,221 @@
+
+/* Booking box */
+.booking-wrapper {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.booking-box {
+  width: fit-content;
+  min-height: 95px;
+  background: var(--white);
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 20px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  font-family: "Montserrat", sans-serif;
+}
+
+.booking-large-field {
+  height: 42px;
+  width: 280px;
+  background: var(--white);
+  border: 3px solid var(--primary-text);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  color: var(--primary-text);
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.booking-large-field:hover {
+  background: var(--topbar-bg);
+}
+
+.book-button {
+  height: 52px;
+  width: 150px;
+  border: none;
+  border-radius: 16px;
+  background: var(--accent);
+  color: var(--white);
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.book-button:hover {
+  background: var(--primary-text);
+}
+
+.material-symbols-outlined.booking-material-icon {
+  font-family: "Material Symbols Outlined";
+  font-size: 30px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-text);
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 40;
+}
+
+/* Date popup */
+.date-popup {
+  margin-top: 20px;
+  background: var(--white);
+  border-radius: 22px;
+  padding: 26px 32px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  font-family: "Montserrat", sans-serif;
+}
+
+.months-wrapper {
+  display: flex;
+  gap: 55px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.month-block h2 {
+  text-align: center;
+  margin: 0 0 24px;
+  color: var(--primary-text);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 36px);
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-grid span {
+  text-align: center;
+  color: #8b8b8b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calendar-grid button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 13px;
+  background: transparent;
+  color: var(--primary-text);
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.calendar-grid button:hover {
+  background: var(--topbar-bg);
+}
+
+.selected-date {
+  background: var(--primary-text) !important;
+  color: var(--white) !important;
+}
+
+.date-done-button,
+.guest-done-button {
+  font-family: "Montserrat", sans-serif;
+  display: block;
+  margin: 24px 0 0 auto;
+  width: 120px;
+  height: 50px;
+  border: none;
+  border-radius: 16px;
+  background: var(--primary-text);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.date-done-button {
+  margin-top: 34px;
+  transition: 0.2s ease;
+}
+
+.date-done-button:hover {
+  background: var(--accent);
+}
+
+/* Guest popup */
+.guest-popup {
+  margin-top: 20px;
+  margin-left: auto;
+  width: 420px;
+  background: var(--white);
+  border-radius: 22px;
+  padding: 28px 32px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  font-family: "Montserrat", sans-serif;
+}
+
+.guest-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.guest-row h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  color: var(--primary-text);
+}
+
+.guest-row p {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.counter button {
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--primary-text);
+  border-radius: 50%;
+  background: white;
+  color: var(--primary-text);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.counter span {
+  min-width: 22px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+}

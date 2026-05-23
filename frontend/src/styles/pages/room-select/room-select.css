@@ -1,0 +1,541 @@
+/* ==========================================================================
+   Base Card Layout & Tokens
+   ========================================================================== */
+.hotel-card {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px; /* Smoother corner radius */
+  overflow: hidden;
+  background: #ffffff;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  margin-bottom: 24px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hotel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Page layout: filter sidebar + rooms area (25% / 75%) */
+.room-select-container {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 24px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   ENHANCED FILTERS SIDEBAR
+   ========================================================================== */
+.filters {
+  width: 25%;
+  min-width: 280px;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  font-family: inherit;
+}
+
+.filters h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #b3002d; /* Brand accent line */
+}
+
+/* Clean Form Groups */
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filters label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+/* Upgraded Input Styling */
+.filters input[type="text"],
+.filters input[type="number"],
+.filters select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #222;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #b3002d;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(179, 0, 45, 0.15);
+}
+
+/* Price Range Integration */
+.price-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.price-row input {
+  flex: 1;
+  text-align: center;
+}
+
+.price-row span {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* Modern Pill/Tag Checkboxes for Status */
+.status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.status-row label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #4b5563;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: normal;
+  margin: 0;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+/* Hide original default checkbox square */
+.status-row input[type="checkbox"] {
+  display: none;
+}
+
+/* Checked state transitions to Brand Color */
+.status-row label:has(input:checked) {
+  background-color: rgba(179, 0, 45, 0.08);
+  border-color: #b3002d;
+  color: #b3002d;
+}
+
+.status-row label:hover {
+  background-color: #e5e7eb;
+}
+
+.status-row label:has(input:checked):hover {
+  background-color: rgba(179, 0, 45, 0.12);
+}
+
+/* Action Area buttons */
+.filter-actions {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #efefef;
+}
+
+.reset-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #1f2937;
+}
+
+/* ==========================================================================
+   ROOMS AREA & CARDS
+   ========================================================================== */
+.rooms-area {
+  width: 75%;
+}
+
+.rooms-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Left Section: Image */
+.card-image {
+  position: relative;
+  width: 280px;
+  min-width: 280px;
+  height: 220px;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  color: #111;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Middle Section: Info */
+.card-info {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-label {
+  color: #b3002d;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hotel-name {
+  margin: 4px 0 6px 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.location-text {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed #e5e7eb;
+}
+
+/* Right Section: Pricing Box */
+.card-pricing {
+  width: 220px;
+  min-width: 220px;
+  padding: 24px;
+  background: #faf8f5; /* Preserved soft warm cream */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid #f1ece7;
+}
+
+.price-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+.member-label {
+  color: #b3002d;
+}
+
+.price-amount {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #111;
+}
+
+.member-amount {
+  color: #b3002d;
+}
+
+.price-amount small {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+/* CTA Action Button */
+.select-btn {
+  background-color: #b3002d;
+  color: #ffffff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+  box-shadow: 0 2px 6px rgba(179, 0, 45, 0.2);
+}
+
+.select-btn:hover:not(:disabled) {
+  background-color: #8c0023;
+  box-shadow: 0 4px 12px rgba(179, 0, 45, 0.3);
+}
+
+.select-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.select-btn:disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .room-select-container {
+    flex-direction: column;
+    padding: 16px;
+    gap: 24px;
+  }
+
+  .filters,
+  .rooms-area {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hotel-card {
+    flex-direction: column;
+  }
+
+  .card-image {
+    width: 100%;
+    min-width: 100%;
+    height: 200px;
+  }
+
+  .card-pricing {
+    width: 100%;
+    min-width: 100%;
+    border-left: none;
+    border-top: 1px solid #f1ece7;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+}
+
+/* ==========================================================================
+   1. Search Modification Bar Container
+   ========================================================================== */
+.room-page-modify-bar {
+  width: 100%;
+  background: var(--white, #ffffff);
+  border-bottom: 1px solid var(--border-soft, #e5e7eb);
+  padding: 16px 0;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  font-family: "Montserrat", sans-serif;
+}
+
+.modify-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   2. Input Fields / Triggers
+   ========================================================================== */
+.modify-field {
+  position: relative; /* Context anchor for dropdown alignment */
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.modify-field.clickable {
+  cursor: pointer;
+}
+
+.modify-field.clickable:hover {
+  background: var(--topbar-bg, #f9fafb);
+  border-color: var(--border-soft, #e5e7eb);
+}
+
+.modify-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.modify-text-group label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #777;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.modify-text-group span {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary-text, #111);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   3. Update Button (Scandinavian Red Theme)
+   ========================================================================== */
+.modify-search-btn {
+  height: 46px;
+  padding: 0 28px;
+  border: none;
+  border-radius: 23px;
+  background: var(--accent, #b3002d);
+  color: var(--white, #ffffff);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modify-search-btn:hover {
+  background: var(--primary-text, #111111);
+}
+
+/* ==========================================================================
+   4. Floating Dropdown Framework & Positioning
+   ========================================================================== */
+.modify-popup {
+  position: absolute;
+  top: calc(100% + 12px);
+  z-index: 100; /* Forces calendars OVER filters/sidebars cleanly */
+  background: var(--white, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+}
+
+/* Alignment configurations */
+.date-snap-left {
+  left: 0;
+}
+
+.date-snap-right {
+  right: 0;
+}
+
+/* ==========================================================================
+   5. Dropdown Inner Stripper (Overrides old layout-breaking styles)
+   ========================================================================== */
+.modify-popup .date-popup,
+.modify-popup .guest-popup {
+  margin-top: 0;
+  box-shadow: none; /* Shadow handled by parent wrapper */
+  border-radius: 16px;
+}
+
+/* ==========================================================================
+   6. Mobile & Tablet Responsiveness
+   ========================================================================== */
+@media (max-width: 992px) {
+  .modify-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .modify-field {
+    border: 1px solid #e5e7eb;
+  }
+
+  .modify-popup {
+    left: 0;
+    right: 0;
+    width: auto;
+  }
+}

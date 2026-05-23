@@ -1,0 +1,135 @@
+.admin-sidebar {
+  position: sticky;
+  top: 0;
+  width: 290px;
+  height: 100vh;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    linear-gradient(180deg, #4d001b 0%, #330012 100%);
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  flex-shrink: 0;
+  box-shadow: 18px 0 50px rgba(76, 0, 27, 0.14);
+}
+
+.admin-sidebar-brand {
+  padding: 0.85rem 0.75rem 1.7rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.admin-sidebar-brand h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.85rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-sidebar-brand p {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.admin-sidebar-nav {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.admin-sidebar-nav a {
+  position: relative;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.95rem;
+  border-radius: 0.9rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: 0.18s ease;
+}
+
+.admin-sidebar-nav a:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.admin-sidebar-nav a.active {
+  background: #ffffff;
+  color: #4d001b;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
+}
+
+.admin-sidebar-nav a.active::before {
+  content: "";
+  width: 0.35rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: var(--accent, #9d174d);
+  position: absolute;
+  left: -0.45rem;
+}
+
+.admin-hotel-card {
+  overflow: hidden;
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.admin-hotel-card img {
+  width: 100%;
+  height: 135px;
+  display: block;
+  object-fit: cover;
+}
+
+.admin-hotel-info {
+  padding: 1rem;
+}
+
+.admin-hotel-info h3 {
+  margin: 0 0 0.5rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.admin-hotel-info p {
+  margin: 0.2rem 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .admin-sidebar-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .admin-hotel-card {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .admin-sidebar-nav {
+    grid-template-columns: 1fr;
+  }
+}

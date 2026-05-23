@@ -1,0 +1,146 @@
+
+/* Wellness page */
+.wellness-page {
+  background: #f8f3ef;
+}
+
+.wellness-slideshow {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  overflow: hidden;
+  background: #111;
+}
+
+.wellness-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: wellnessFade 16s infinite;
+}
+
+.wellness-slideshow img:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wellness-slideshow img:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.wellness-slideshow img:nth-child(3) {
+  animation-delay: 8s;
+}
+
+.wellness-slideshow img:nth-child(4) {
+  animation-delay: 12s;
+}
+
+@keyframes wellnessFade {
+  0% {
+    opacity: 0;
+  }
+
+  6% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  31% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.wellness-intro-section {
+  padding: 115px 24px;
+  background: linear-gradient(
+    180deg,
+    #7a0029 0%,
+    #5f0022 45%,
+    #4d001b 100%
+  );
+}
+
+.wellness-intro-content {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+}
+
+.wellness-intro-content h1 {
+  margin: 0 0 36px;
+  font-size: 56px;
+  font-weight: 700;
+  color: white;
+}
+
+.wellness-intro-content p {
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.wellness-price {
+  margin-top: 34px !important;
+  color: white !important;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px !important;
+  font-weight: 800;
+}
+
+.wellness-request-section {
+  background: #efe6dd;
+  padding: 105px 24px;
+}
+
+.wellness-request-content {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wellness-request-content h2 {
+  margin: 0 0 26px;
+  color: var(--primary-text);
+  font-size: 42px;
+  font-weight: 300;
+}
+
+.wellness-request-content p {
+  margin: 0 auto 34px;
+  color: #5d5d5d;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.wellness-request-content a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 190px;
+  height: 46px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+}
+
+.wellness-request-content a:hover {
+  background: var(--primary-text);
+}
