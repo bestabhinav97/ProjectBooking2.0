@@ -18,11 +18,11 @@ import RoomSelect from "./pages/room-select/RoomSelect";
 import SuiteRoom from "./pages/SuiteRoom";
 import MeetingsEvents from "./pages/MeetingsEvents";
 import Wellness from "./pages/Wellness";
-import AdminTest from "./pages/AdminTest";
 import AdminReservations from "./pages/AdminReservations";
 import AdminLayout from "./pages/AdminLayout";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminUsers from "./pages/AdminUsers";
+import AdminRooms from "./pages/AdminRooms";
 import RoomSummary from "./pages/room-summary/RoomSummary";
 import BookingSuccess from "./pages/room-summary/BookingSuccess";
 import BookingFailed from "./pages/room-summary/BookingFailed";
@@ -52,18 +52,19 @@ function App() {
           <Route path="/rooms/suite" element={<SuiteRoom />} />
           <Route path="/meetings-events" element={<MeetingsEvents />} />
           <Route path="/wellness" element={<Wellness />} />
-          <Route path="/admin-test" element={<AdminTest />} />
-          <Route path="/admin/reservations" element={<AdminReservations />} />
-          <Route path="/admin" element={<AdminLayout />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/booking/summary" element={<RoomSummary />} />
           <Route path="/booking-success" element={<BookingSuccess />} />
           <Route path="/booking-failed" element={<BookingFailed />} />
           <Route path="/my-bookings" element={<MyBookings />} />
           <Route path="/restaurant-bar" element={<RestaurantBar />} />
           <Route path="/about" element={<AboutUs />} />
-
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="reservations" element={<AdminReservations />} />
+            <Route path="rooms" element={<AdminRooms />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
