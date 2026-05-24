@@ -1,60 +1,96 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ isOpen = false, onClose = () => {} }) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
+  const handleNavigate = () => onClose();
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar${isOpen ? " navbar--open" : ""}`}>
       <ul className="nav-links">
         <li>
-          <Link to="/packages-offers">Packages & Offers</Link>
+          <Link to="/packages-offers" onClick={handleNavigate}>
+            Packages & Offers
+          </Link>
         </li>
 
         <li>
-          <Link to="/rooms">Rooms</Link>
+          <Link to="/rooms" onClick={handleNavigate}>
+            Rooms
+          </Link>
         </li>
 
         <li>
-          <Link to="/meetings-events">Meetings & Events</Link>
+          <Link to="/meetings-events" onClick={handleNavigate}>
+            Meetings & Events
+          </Link>
         </li>
 
         <li>
-          <Link to="/wellness">Wellness</Link>
+          <Link to="/wellness" onClick={handleNavigate}>
+            Wellness
+          </Link>
         </li>
 
         <li className="has-dropdown">
-          <Link to="/restaurant-bar" className="has-arrow">
+          <Link to="/restaurant-bar" onClick={handleNavigate}>
             Restaurant & Bar
           </Link>
 
           <ul className="dropdown">
             <li>
-              <Link to="/restaurant-bar#breakfast">Breakfast</Link>
+              <Link to="/restaurant-bar#breakfast" onClick={handleNavigate}>
+                Breakfast
+              </Link>
             </li>
             <li>
-              <Link to="/restaurant-bar#lunch">Lunch</Link>
+              <Link to="/restaurant-bar#lunch" onClick={handleNavigate}>
+                Lunch
+              </Link>
             </li>
             <li>
-              <Link to="/restaurant-bar#dinner">Dinner</Link>
+              <Link to="/restaurant-bar#dinner" onClick={handleNavigate}>
+                Dinner
+              </Link>
             </li>
             <li>
-              <Link to="/restaurant-bar#party">After Work Party</Link>
+              <Link to="/restaurant-bar#party" onClick={handleNavigate}>
+                After Work Party
+              </Link>
             </li>
           </ul>
         </li>
 
         <li className="has-dropdown">
-          <Link to="/about" className="has-arrow">
+          <Link to="/about" onClick={handleNavigate}>
             About Us
           </Link>
 
           <ul className="dropdown">
             <li>
-              <Link to="/about#contact">Contact Us</Link>
+              <Link to="/about#contact" onClick={handleNavigate}>
+                Contact Us
+              </Link>
             </li>
             <li>
-              <Link to="/about#find">Find Us</Link>
+              <Link to="/about#find" onClick={handleNavigate}>
+                Find Us
+              </Link>
             </li>
             <li>
-              <Link to="/about#company">Company Information</Link>
+              <Link to="/about#company" onClick={handleNavigate}>
+                Company Information
+              </Link>
             </li>
           </ul>
         </li>

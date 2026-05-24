@@ -149,39 +149,61 @@
     position: fixed;
     top: 129px;
     left: 0;
+    right: 0;
     width: 100%;
-    max-height: calc(100vh - 129px);
+    height: calc(100vh - 129px);
+    height: calc(100dvh - 129px);
     overflow-y: auto;
-    background: var(--header-bg);
-    border-top: 1px solid var(--border-soft);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    background: rgba(20, 8, 12, 0.72);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-top: none;
+    box-shadow: none;
+    padding: 28px 24px 48px;
     z-index: 997;
   }
 
   .navbar--open {
-    display: block;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .nav-links {
     flex-direction: column;
-    gap: 0;
-    padding: 4px 0 16px;
+    gap: 4px;
+    padding: 12px 0 24px;
+    width: 100%;
+    max-width: 420px;
   }
 
   .nav-links li {
     width: 100%;
+    text-align: center;
   }
 
   .nav-links a,
   .nav-links a:visited {
-    padding: 13px 28px;
-    font-size: 14px;
-    text-align: left;
-    border-bottom: 1px solid var(--border-soft);
+    display: block;
+    padding: 14px 24px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-align: center;
+    color: var(--white);
+    border-bottom: none;
+    text-decoration: none;
+    text-transform: none;
   }
 
   .nav-links > li > a::after {
     display: none;
+  }
+
+  .nav-links a:active,
+  .nav-links a:focus-visible {
+    color: var(--accent);
   }
 
   .navbar .dropdown {
@@ -191,15 +213,40 @@
     transform: none;
     box-shadow: none;
     border: none;
-    background: var(--topbar-bg);
+    background: transparent;
     min-width: 100%;
-    padding: 0;
+    padding: 0 0 6px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    text-align: center;
   }
 
-  .navbar .dropdown a {
-    padding: 11px 40px;
-    border-bottom: 1px solid var(--border-soft);
-    font-size: 13px;
+  .navbar .dropdown li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar .dropdown a,
+  .navbar .dropdown a:visited {
+    display: inline-block;
+    padding: 8px 16px;
+    border-bottom: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    color: rgba(255, 255, 255, 0.78);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .navbar .dropdown a:hover,
+  .navbar .dropdown a:focus-visible {
+    background: transparent;
+    color: var(--white);
   }
 
   .navbar .has-dropdown:hover .dropdown,
