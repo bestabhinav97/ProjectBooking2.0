@@ -1,0 +1,284 @@
+/* Topbar */
+.topbar {
+  width: 100%;
+  height: 37px;
+  background-color: var(--topbar-bg);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: var(--primary-text);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.topbar-language {
+  position: relative;
+}
+
+.topbar-language button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+}
+
+.topbar-language button::after {
+  content: "▾";
+  font-size: 11px;
+  color: var(--primary-text);
+}
+
+.globe-icon {
+  font-family: "Material Symbols Outlined";
+  font-size: 18px;
+  line-height: 1;
+  color: var(--primary-text);
+  display: inline-flex;
+  align-items: center;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 200;
+}
+
+.language-dropdown button {
+  all: unset;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-text);
+  display: block;
+}
+
+.language-dropdown button::after {
+  content: none;
+}
+
+.language-dropdown button:hover {
+  background: var(--topbar-bg);
+}
+
+/* Header */
+.header {
+  height: 92px;
+  background: var(--header-bg);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0 54px;
+  color: var(--primary-text);
+  font-family: "Montserrat", sans-serif;
+  position: sticky;
+  top: 37px;
+  z-index: 999;
+}
+
+.header-brand {
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.header-brand:hover {
+  opacity: 0.85;
+}
+
+/* Simple Header */
+.simple-header {
+  height: 90px;
+  background: var(--white);
+  border-bottom: 3px solid var(--primary-text);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 40px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.simple-back {
+  color: var(--primary-text);
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.simple-back span {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.simple-logo {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.simple-empty {
+  width: 100%;
+}
+
+/* Login */
+.header-login {
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primary-text);
+  cursor: pointer;
+}
+
+.login-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.login-icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--white);
+}
+
+.login-text {
+  white-space: nowrap;
+}
+
+.header-login:hover .login-icon-circle {
+  background: var(--accent);
+}
+
+.logout-btn {
+  background: #111;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+/* Header right slot */
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  justify-self: end;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-text);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburger--open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger--open span:nth-child(2) { opacity: 0; }
+.hamburger--open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+@media (max-width: 1329px) {
+  .header {
+    padding: 0 20px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .login-text {
+    display: none;
+  }
+}
+
+/* Secondary page header transition */
+.rooms-page,
+.offers-page,
+.room-detail-page,
+.meetings-events-page,
+.wellness-page,
+.summary-page {
+  background: #f8f3ef;
+}
+
+body:has(.rooms-page) .header,
+body:has(.offers-page) .header,
+body:has(.room-detail-page) .header,
+body:has(.meetings-events-page) .header,
+body:has(.wellness-page) .header,
+body:has(.summary-page) .header {
+  background: #f8f3ef;
+  box-shadow: none;
+}
+
+body:has(.rooms-page) .topbar,
+body:has(.offers-page) .topbar,
+body:has(.room-detail-page) .topbar,
+body:has(.meetings-events-page) .topbar,
+body:has(.wellness-page) .topbar,
+body:has(.summary-page) .topbar {
+  background: #f8f3ef;
+}

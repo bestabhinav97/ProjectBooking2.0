@@ -1,0 +1,456 @@
+/* ── My Bookings page ─────────────────────────────────────── */
+
+.mb-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8f3ef;
+  color: var(--primary-text);
+}
+
+.mb-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1.5rem 6rem;
+}
+
+.mb-layout {
+  width: 100%;
+  max-width: 72rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Intro ─────────────────────────────────────────────────── */
+
+.mb-intro {
+  margin-bottom: 1.75rem;
+}
+
+.mb-cursive {
+  margin: 0 0 0.5rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--primary-text);
+  opacity: 0.7;
+}
+
+.mb-title {
+  margin: 0;
+  color: var(--accent);
+  font-size: 2.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ── Tabs ──────────────────────────────────────────────────── */
+
+.mb-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.mb-tab {
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--border-soft);
+  border-radius: 9999px;
+  background: var(--white);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary-text);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.mb-tab:hover {
+  border-color: var(--primary-text);
+  background: rgba(77, 0, 27, 0.06);
+}
+
+.mb-tab--active {
+  background: var(--primary-text);
+  border-color: var(--primary-text);
+  color: var(--white);
+}
+
+.mb-tab--active:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Booking list ──────────────────────────────────────────── */
+
+.mb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Booking card ──────────────────────────────────────────── */
+
+.mb-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mb-card:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.11);
+}
+
+/* ── Card image ────────────────────────────────────────────── */
+
+.mb-card-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.mb-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Status badge ──────────────────────────────────────────── */
+
+.mb-status-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mb-status-badge--confirmed {
+  background: #14532d;
+  color: #dcfce7;
+}
+
+.mb-status-badge--pending {
+  background: #78350f;
+  color: #fef3c7;
+}
+
+.mb-status-badge--cancelled {
+  background: #3f1012;
+  color: #fecdd3;
+}
+
+/* ── Card body ─────────────────────────────────────────────── */
+
+.mb-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.mb-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.mb-room-type {
+  margin: 0 0 0.25rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary-text);
+}
+
+.mb-booking-meta {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #9e7a7a;
+}
+
+.mb-total {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ── Dates row ─────────────────────────────────────────────── */
+
+.mb-dates-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 1.25rem;
+  background: #f8f3ef;
+  border-radius: 0.5rem;
+}
+
+.mb-date-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.mb-date-label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9e7a7a;
+}
+
+.mb-date-value {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-text);
+}
+
+.mb-date-arrow {
+  font-size: 1.1rem;
+  color: var(--border-soft);
+  font-weight: 700;
+  align-self: center;
+}
+
+.mb-date-block--nights {
+  margin-left: auto;
+}
+
+/* ── Card actions ──────────────────────────────────────────── */
+
+.mb-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mb-btn-outline {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border: 2px solid var(--primary-text);
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary-text);
+  text-decoration: none;
+  transition: 0.2s ease;
+  cursor: pointer;
+  background: transparent;
+}
+
+.mb-btn-outline:hover {
+  background: var(--primary-text);
+  color: var(--white);
+}
+
+.mb-btn-cancel {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border: 2px solid var(--accent);
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.mb-btn-cancel:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* ── Empty state ───────────────────────────────────────────── */
+
+.mb-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem 2rem;
+  background: var(--white);
+  border-radius: 0.75rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+.mb-empty-icon {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.mb-empty-text {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.mb-empty-btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: var(--white);
+  transition: 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.mb-empty-btn:hover {
+  background: var(--primary-text);
+}
+
+/* ── Aside ─────────────────────────────────────────────────── */
+
+.mb-aside {
+  width: 100%;
+}
+
+.mb-aside-inner {
+  padding: 2rem;
+  border-radius: 0.75rem;
+  background: var(--white);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.mb-aside-cursive {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--primary-text);
+  opacity: 0.7;
+}
+
+.mb-aside-title {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-text);
+  line-height: 1.2;
+}
+
+.mb-aside-text {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--primary-text);
+  max-width: 20rem;
+}
+
+.mb-aside-btn {
+  width: 100%;
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+  background: var(--primary-text);
+  color: var(--white);
+}
+
+.mb-aside-btn:hover {
+  background: var(--accent);
+}
+
+.mb-aside-btn--alt {
+  background: transparent;
+  border: 2px solid var(--primary-text);
+  color: var(--primary-text);
+}
+
+.mb-aside-btn--alt:hover {
+  background: var(--primary-text);
+  color: var(--white);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+
+@media (min-width: 640px) {
+  .mb-card {
+    flex-direction: row;
+  }
+
+  .mb-card-image-wrap {
+    width: 220px;
+    height: auto;
+    min-height: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mb-main {
+    padding: 3rem 2rem 8rem;
+  }
+
+  .mb-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .mb-section {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mb-aside {
+    width: 300px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 140px;
+  }
+}

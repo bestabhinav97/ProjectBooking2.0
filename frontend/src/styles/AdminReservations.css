@@ -1,0 +1,225 @@
+.admin-reservations-message {
+  margin-top: 1.4rem;
+  color: rgba(76, 0, 27, 0.68);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.error-msg {
+  color: #9f1d1d;
+}
+
+.admin-reservations-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-reservations-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-reservations-table th,
+.admin-reservations-table td {
+  padding: 1rem 0.85rem;
+  border-bottom: 1px solid rgba(77, 0, 27, 0.09);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.admin-reservations-table th {
+  background: #faf7f5;
+  color: rgba(76, 0, 27, 0.58);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.admin-reservations-table th:first-child {
+  border-top-left-radius: 0.75rem;
+}
+
+.admin-reservations-table th:last-child {
+  border-top-right-radius: 0.75rem;
+}
+
+.admin-reservations-table td {
+  color: var(--primary-text, #4d001b);
+  font-size: 0.88rem;
+  font-weight: 750;
+}
+
+.admin-reservations-table tbody tr {
+  transition: 0.15s ease;
+}
+
+.admin-reservations-table tbody tr:hover {
+  background: #fbf7f8;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: capitalize;
+}
+
+.status-badge.confirmed {
+  background: #e4f6ea;
+  color: #1f7041;
+}
+
+.status-badge.pending {
+  background: #fff4d6;
+  color: #8a5a00;
+}
+
+.status-badge.cancelled {
+  background: #ffebe6;
+  color: #bf2600;
+}
+
+.action-btn-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  border: none;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.edit-btn,
+.save-btn {
+  background: #e8eefc;
+  color: #254c97;
+}
+
+.delete-btn {
+  background: #ffebe6;
+  color: #bf2600;
+}
+
+.cancel-btn {
+  background: #f1edf0;
+  color: rgba(76, 0, 27, 0.84);
+}
+
+.table-inline-input,
+.table-inline-select {
+  width: 100%;
+  min-width: 7rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(77, 0, 27, 0.14);
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 750;
+  color: var(--primary-text, #4d001b);
+}
+
+.table-inline-input:focus,
+.table-inline-select:focus {
+  outline: none;
+  border-color: var(--accent, #9d174d);
+  box-shadow: 0 0 0 4px rgba(157, 23, 77, 0.12);
+}
+
+.cost-input {
+  max-width: 7rem;
+}
+
+@media (max-width: 700px) {
+  .admin-reservations-table-wrapper {
+    overflow-x: visible;
+  }
+
+  .admin-reservations-table,
+  .admin-reservations-table thead,
+  .admin-reservations-table tbody,
+  .admin-reservations-table tr,
+  .admin-reservations-table th,
+  .admin-reservations-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-reservations-table thead {
+    display: none;
+  }
+
+  .admin-reservations-table tr {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(77, 0, 27, 0.12);
+    border-radius: 1.1rem;
+    background: #ffffff;
+    box-shadow: 0 14px 36px rgba(76, 0, 27, 0.07);
+  }
+
+  .admin-reservations-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    white-space: normal;
+  }
+
+  .admin-reservations-table td::before {
+    color: rgba(76, 0, 27, 0.58);
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .admin-reservations-table td:nth-child(1)::before {
+    content: "Booking ID";
+  }
+
+  .admin-reservations-table td:nth-child(2)::before {
+    content: "User ID";
+  }
+
+  .admin-reservations-table td:nth-child(3)::before {
+    content: "Room";
+  }
+
+  .admin-reservations-table td:nth-child(4)::before {
+    content: "Check in";
+  }
+
+  .admin-reservations-table td:nth-child(5)::before {
+    content: "Check out";
+  }
+
+  .admin-reservations-table td:nth-child(6)::before {
+    content: "Total cost";
+  }
+
+  .admin-reservations-table td:nth-child(7)::before {
+    content: "Status";
+  }
+
+  .admin-reservations-table td:nth-child(8)::before {
+    content: "Actions";
+  }
+
+  .action-btn-group {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .action-btn {
+    width: auto;
+  }
+}

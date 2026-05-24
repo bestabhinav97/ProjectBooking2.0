@@ -1,0 +1,366 @@
+
+/* Rooms overview page */
+.rooms-page {
+  background: #f8f3ef;
+  padding: 0 22px 120px;
+}
+
+.rooms-page-hero {
+  text-align: center;
+  padding: 70px 20px 90px;
+}
+
+.rooms-page-hero p {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.rooms-page-hero h1 {
+  margin: 0;
+  color: var(--primary-text);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.rooms-overview-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 70px 56px;
+}
+
+.rooms-overview-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.rooms-overview-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.rooms-overview-content {
+  padding-top: 34px;
+}
+
+.rooms-overview-content h2 {
+  margin: 0 0 16px;
+  color: #666;
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.rooms-overview-content p {
+  max-width: 560px;
+  margin: 0 0 24px;
+  color: #5d5d5d;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.rooms-overview-content a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 165px;
+  height: 44px;
+  margin: 34px auto 0;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: 0.2s ease;
+}
+
+.rooms-overview-content a:hover {
+  background: var(--primary-text);
+}
+
+/* Room detail pages */
+.room-detail-page {
+  background: #f8f3ef;
+  padding-bottom: 120px;
+}
+
+.room-detail-title {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 70px 40px 45px;
+}
+
+.room-detail-title h1 {
+  margin: 0;
+  color: var(--primary-text);
+  font-size: 52px;
+  font-weight: 300;
+}
+
+.room-detail-section {
+  background: #efe6dd;
+  padding: 70px 40px;
+}
+
+.room-detail-layout {
+  max-width: 1250px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 0.75fr;
+  gap: 55px;
+  align-items: start;
+}
+
+.room-detail-image img {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  display: block;
+}
+
+.room-detail-text {
+  color: #5d5d5d;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.room-detail-text p {
+  margin: 0 0 22px;
+}
+
+.back-overview {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--primary-text);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.back-overview:hover {
+  color: var(--accent);
+}
+
+.room-detail-info {
+  font-family: "Montserrat", sans-serif;
+}
+
+.room-detail-info ul {
+  margin: 0 0 38px;
+  padding-left: 20px;
+  color: var(--primary-text);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.room-book-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 270px;
+  height: 48px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  transition: 0.2s ease;
+}
+
+.room-book-button:hover {
+  background: var(--primary-text);
+}
+
+/* Rooms slider */
+.rooms-slider {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.rooms-slider-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.rooms-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.rooms-slider img[src*="single-room"] {
+  object-position: center 90%;
+}
+
+.rooms-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.rooms-slider h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: white;
+  font-size: 8vw;
+  font-weight: 300;
+  letter-spacing: 8px;
+  font-family: "Montserrat", sans-serif;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 90px;
+  font-weight: 200;
+  cursor: pointer;
+  z-index: 5;
+  transition: 0.2s ease;
+}
+
+.slider-btn:hover {
+  color: white;
+}
+
+.slider-left {
+  left: 24px;
+}
+
+.slider-right {
+  right: 24px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+  .rooms-page {
+    padding: 0 32px 80px;
+  }
+
+  .rooms-overview-grid {
+    gap: 50px 36px;
+  }
+
+  /* Room detail: collapse info column into 2 cols */
+  .room-detail-layout {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+  }
+
+  .room-detail-title h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rooms-page {
+    padding: 0 16px 60px;
+  }
+
+  .rooms-page-hero {
+    padding: 48px 8px 52px;
+  }
+
+  .rooms-page-hero h1 {
+    font-size: 30px;
+  }
+
+  /* Overview: 1 column */
+  .rooms-overview-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .rooms-overview-card img {
+    height: 240px;
+  }
+
+  .rooms-overview-content {
+    padding-top: 20px;
+  }
+
+  .rooms-overview-content h2 {
+    font-size: 22px;
+  }
+
+  .rooms-overview-content p {
+    font-size: 15px;
+    max-width: 100%;
+  }
+
+  /* Room detail: 1 column */
+  .room-detail-title {
+    padding: 40px 20px 28px;
+  }
+
+  .room-detail-title h1 {
+    font-size: 28px;
+  }
+
+  .room-detail-section {
+    padding: 36px 20px;
+  }
+
+  .room-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .room-detail-image img {
+    height: 260px;
+  }
+
+  .room-detail-text {
+    font-size: 16px;
+  }
+
+  .room-book-button {
+    width: 100%;
+  }
+
+  /* Slider */
+  .slider-btn {
+    font-size: 56px;
+  }
+
+  .rooms-slider h2 {
+    letter-spacing: 3px;
+    white-space: normal;
+    text-align: center;
+    width: 80%;
+  }
+}
+

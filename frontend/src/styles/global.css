@@ -1,0 +1,27 @@
+:root {
+  --topbar-bg: #f2ece6;
+  --header-bg: #ffffff;
+  --primary-text: #4d001b;
+  --accent: #cd0a20;
+  --white: #ffffff;
+  --border-soft: #e5ded8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  background: var(--white);
+  color: var(--primary-text);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Montserrat", sans-serif;
+}
