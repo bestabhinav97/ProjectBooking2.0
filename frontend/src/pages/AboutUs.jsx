@@ -22,32 +22,32 @@ import "../styles/aboutUs.css";
 const teamMembers = [
   {
     name: "San Mirza",
-    role: "Admin users management, frontend pages and backend integration",
+    role: "Frontend, Backend, Production Testing",
     image: sanImage,
   },
   {
     name: "Fatih celik",
-    role: "Authentication, backend routes and Supabase database",
+    role: "Frontend, Backend, System Integration, Deployment, Production Testing",
     image: fatihImage,
   },
   {
     name: "Mateusz Plizga",
-    role: "Rooms, booking flow and room details",
+    role: "Frontend, Backend, Authentication, Deployment",
     image: mateuszImage,
   },
   {
     name: "Azhaf khan",
-    role: "UI design, layout styling and responsive pages",
+    role: "Frontend, Authentication UI, User Profile, Responsive Design",
     image: azhafImage,
   },
   {
     name: "Johnny Chang",
-    role: "Hotel service pages, restaurant, wellness and content",
+    role: "Backend, Admin Panel",
     image: johnnyImage,
   },
   {
     name: "Abhinav Srinivasan",
-    role: "Testing, documentation, GitHub and presentation support",
+    role: "Backend, Frontend",
     image: abiImage,
   },
 ];
