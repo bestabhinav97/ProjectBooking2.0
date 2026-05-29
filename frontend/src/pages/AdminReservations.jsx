@@ -29,7 +29,10 @@ function AdminReservations() {
       const response = await fetch(`${API_BASE}/bookings/admin/allBookings`, {
         method: "GET",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+},
       });
 
       const result = await response.json();
@@ -56,7 +59,10 @@ function AdminReservations() {
       const response = await fetch(`${API_BASE}/bookings/admin/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+},
       });
 
       const result = await response.json();
@@ -103,7 +109,10 @@ function AdminReservations() {
       const response = await fetch(`${API_BASE}/bookings/admin/update/${id}`, {
         method: "PUT",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+},
         body: JSON.stringify(editFormData),
       });
 

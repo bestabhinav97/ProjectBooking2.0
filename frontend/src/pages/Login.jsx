@@ -44,6 +44,10 @@ function Login() {
       }
 
       const loggedInUser = data.user ?? data;
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
       setUser(loggedInUser);
       if (loggedInUser.role === "admin") {
         navigate("/admin/dashboard");

@@ -29,7 +29,14 @@ module.exports.checkLogin = (req, res, next) => {
   try {
     // Extract JWT token from request cookies
     // Token was set as httpOnly cookie during login for security
-    const token = req.cookies.token;
+    const cookieToken = req.cookies?.token;
+    const authHeader = req.headers.authorization;
+
+    const headerToken = authHeader?.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : null;
+
+    const token = cookieToken || headerToken;
 
     // If no token exists, user is not logged in
     if (!token) {

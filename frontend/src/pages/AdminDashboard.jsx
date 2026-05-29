@@ -40,8 +40,11 @@ function AdminDashboard() {
         {
           method: "GET",
           credentials: "include",
-          headers: { "Content-Type": "application/json" },
-        }
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        } 
       );
 
       const result = await response.json();
